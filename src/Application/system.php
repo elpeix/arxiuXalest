@@ -2,6 +2,7 @@
 
 define('APP_NAME', 'Arxiu Xalest');
 
+// /!\ WARNING - Never upload valid credentials!!!
 define('DB_HOST','localhost');
 define('DB_USER','root');
 define('DB_PASS','igualada');
