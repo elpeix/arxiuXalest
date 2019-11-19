@@ -1,7 +1,7 @@
 {
     "name": "arxiu/xalest",
     "description": "Programa per a la gestió de l'arxiu de la Xalest",
-    "license": "MIT",
+    "license": "GPLv3",
     "authors": [
         {
             "name": "Francesc d'Assís Requesens i Roca",
