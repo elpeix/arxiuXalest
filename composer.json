@@ -1,0 +1,28 @@
+{
+    "name": "arxiu/xalest",
+    "description": "Programa per a la gestió de l'arxiu de la Xalest",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Francesc d'Assís Requesens i Roca",
+            "email": "francesc.requesens@gmail.com",
+            "homepage": "https://www.francescrequesens.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^1.24",
+        "php-di/php-di": "^6.0",
+        "slim/slim": "^4.0",
+        "slim/psr7": "^0.6.0",
+        "slim/php-view": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 -t public",
+        "test": "phpunit"
+    }
+}
