@@ -20,7 +20,7 @@ app.scoreController = MF.Controller({
 	create: function(){
 		app.menu.mainMenu('active', 'scores');
 		app.header.text('Afegeix partitura');
-		createElement('scores', new Score());
+		createElement('score', new Score(), 'scores');
 	},
 
 	get: function(id){
@@ -31,12 +31,12 @@ app.scoreController = MF.Controller({
 	},
 
 	edit: function(id){
-		app.menu.mainMenu('active', 'arxiu');
+		app.menu.mainMenu('active', 'scores');
 		app.scoreCollection.get({
 			identifier: id,
 			success: function(data) {
 				app.header.text('Edita la partitura: ' + data.content.name);
-				editElement('scores', data);
+				editElement('score', data, 'scores');
 			}
 		});
 	}
@@ -57,7 +57,7 @@ app.composerController = MF.Controller({
 	create: function(){
 		app.menu.mainMenu('active', 'composers');
 		app.header.text('Nou compositor');
-		createElement('composers', new Composer());
+		createElement('composer', new Composer(), 'composers');
 	},
 	edit: function(id) {
 		app.menu.mainMenu('active', 'composers');
@@ -65,7 +65,7 @@ app.composerController = MF.Controller({
 			identifier: id,
 			success: function(data) {
 				app.header.text('Edita el compositor: ' + data.content.name);
-				editElement('composers', data);
+				editElement('composer', data, 'composers');
 			}
 		});
 	}
@@ -86,7 +86,7 @@ app.choirTypeController = MF.Controller({
 	create: function(){
 		app.menu.mainMenu('active', 'choirTypes');
 		app.header.text('Nou conjunt de veus');
-		createElement('choirTypes', new ChoirType());
+		createElement('choirType', new ChoirType(), 'choirTypes');
 	},
 	edit: function(id) {
 		app.menu.mainMenu('active', 'choirTypes');
@@ -94,7 +94,7 @@ app.choirTypeController = MF.Controller({
 			identifier: id,
 			success: function(data) {
 				app.header.text('Edita el conjunt de veus: ' + data.content.name);
-				editElement('choirTypes', data);
+				editElement('choirType', data, 'choirTypes');
 			}
 		});
 	}
@@ -115,7 +115,7 @@ app.cupboardController = MF.Controller({
 	create: function(){
 		app.menu.mainMenu('active', 'cupboards');
 		app.header.text('Nou armari');
-		createElement('cupboards', new Cupboard());
+		createElement('cupboard', new Cupboard(), 'cupboards');
 	},
 	edit: function(id) {
 		app.menu.mainMenu('active', 'cupboards');
@@ -123,7 +123,7 @@ app.cupboardController = MF.Controller({
 			identifier: id,
 			success: function(data) {
 				app.header.text('Edita l\'armari: ' + data.content.name);
-				editElement('cupboards', data);
+				editElement('cupboard', data, 'cupboards');
 			}
 		});
 	}
@@ -144,7 +144,7 @@ app.boxController = MF.Controller({
 	create: function(){
 		app.menu.mainMenu('active', 'boxes');
 		app.header.text('Nova caixa');
-		createElement('boxes', new Box());
+		createElement('box', new Box(), 'boxes');
 	},
 	edit: function(id) {
 		app.menu.mainMenu('active', 'boxes');
@@ -152,7 +152,7 @@ app.boxController = MF.Controller({
 			identifier: id,
 			success: function(data) {
 				app.header.text('Edita la caixa: ' + data.content.name);
-				editElement('boxes', data);
+				editElement('box', data, 'boxes');
 			}
 		});
 	}
@@ -173,7 +173,7 @@ app.languageController = MF.Controller({
 	create: function(){
 		app.menu.mainMenu('active', 'languages');
 		app.header.text('Nou idioma');
-		createElement('languages', new Language());
+		createElement('language', new Language(), 'languages');
 	},
 	edit: function(id) {
 		app.menu.mainMenu('active', 'languages');
@@ -181,7 +181,7 @@ app.languageController = MF.Controller({
 			identifier: id,
 			success: function(data) {
 				app.header.text('Edita l\'idioma: ' + data.content.name);
-				editElement('languages', data);
+				editElement('language', data, 'languages');
 			}
 		});
 	}
@@ -202,7 +202,7 @@ app.lyricistController = MF.Controller({
 	create: function(){
 		app.menu.mainMenu('active', 'lyricists');
 		app.header.text('Nou lletrista');
-		createElement('lyricists', new Lyricist());
+		createElement('lyricist', new Lyricist(), 'lyricists');
 	},
 	edit: function(id) {
 		app.menu.mainMenu('active', 'lyricists');
@@ -210,7 +210,7 @@ app.lyricistController = MF.Controller({
 			identifier: id,
 			success: function(data) {
 				app.header.text('Edita el lletrista: ' + data.content.name);
-				editElement('lyricists', data);
+				editElement('lyricist', data, 'lyricists');
 			}
 		});
 	}
@@ -231,7 +231,7 @@ app.styleController = MF.Controller({
 	create: function(){
 		app.menu.mainMenu('active', 'styles');
 		app.header.text('Nou estil');
-		createElement('styles', new Style());
+		createElement('style', new Style(), 'styles');
 	},
 	edit: function(id) {
 		app.menu.mainMenu('active', 'styles');
@@ -239,7 +239,7 @@ app.styleController = MF.Controller({
 			identifier: id,
 			success: function(data) {
 				app.header.text('Edita l\'estil: ' + data.content.name);
-				editElement('styles', data);
+				editElement('style', data, 'styles');
 			}
 		});
 	}

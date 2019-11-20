@@ -60,6 +60,7 @@
 		var iden 	 = options.iden;
 		var edit	 = options.edit;
 		var type	 = options.type;
+		var newReg   = options.newReg;
 		var callback = options.callback;
 		var cancel	 = options.cancel;
 		
@@ -101,7 +102,7 @@
 			}).appendTo($form);
 
 			// Save and create new Regsiter
-			if (!edit){
+			if (!edit && newReg){
 				var $saveAndNew = $('<input />',{
 					type : "button",
 					'class' : "fr-nr",
@@ -227,9 +228,9 @@
 					}).appendTo($field);
 					if (edit){
 					    if (dataEl.type == 'collection'){
-					    	if (dataEl.valor)
+					    	if (dataEl.valor.id)
 	                            app[dataEl.seccio + 'Collection'].get({
-	                            	identifier: dataEl.valor,
+	                            	identifier: dataEl.valor.id,
 	                            	async: false,
 	                            	success: function(dataItem){
 	                            		$box.val(dataItem.content.name? dataItem.content.name : '-');

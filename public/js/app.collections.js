@@ -42,7 +42,7 @@ app.languageCollection.fetch({async:false});
 
 app.cupboardCollection = new MF.Collection({
 	url: uriREST + 'cupboards',
-	route: 'cupboard/',
+	route: 'cupboards/',
 	model : Cupboard
 });
 app.cupboardCollection.fetch({async:false});

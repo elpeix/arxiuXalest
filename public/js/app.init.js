@@ -1,4 +1,3 @@
-// Load
 $(document).ready(function(){
 	initApp();
 });
@@ -16,43 +15,34 @@ function initApp(ev){
 		data: {
 			search : {link: '#', text : 'Cerca'},
 			scores : {link: '#scores', text : 'Partitures'},
-			cupboards : {link: '#cupboards', text : 'Armaris'},
-			boxes : {link: '#boxes', text : 'Caixes'},
-			choirTypes : {link: '#choirTypes', text : 'Veus'},
-			languages : {link: '#languages', text : 'Idiomes'},
 			composers : {link: '#composers', text : 'Compositors'},
 			lyricists : {link: '#lyricists', text : 'Lletristes'},
-			styles : {link: '#styles', text : 'Estils'}
+			choirTypes : {link: '#choirTypes', text : 'Veus'},
+			styles : {link: '#styles', text : 'Estils'},
+			languages : {link: '#languages', text : 'Idiomes'},
+			cupboards : {link: '#cupboards', text : 'Armaris'},
+			boxes : {link: '#boxes', text : 'Caixes'}
 		}
 	});
 
 	var urls = {
 		'' : app.homeController.view,
-
 		'scores' : app.scoreController.list,
 		'scores/:id' : app.scoreController.get,
-
 		'cupboards' : app.cupboardController.list,
 		'cupboards/:id' : app.cupboardController.get,
-
 		'boxes' : app.boxController.list,
 		'boxes/:id' : app.boxController.get,
-
 		'choirTypes' : app.choirTypeController.list,
 		'choirTypes/:id' : app.choirTypeController.get,
-
 		'languages' : app.languageController.list,
 		'languages/:id' : app.languageController.get,
-
 		'composers' : app.composerController.list,
 		'composers/:id' : app.composerController.get,
-
 		'lyricists' : app.lyricistController.list,
 		'lyricists/:id' : app.lyricistController.get,
-
 		'styles' : app.styleController.list,
 		'styles/:id' : app.styleController.get,
-
 		'*' : app.homeController.nops
 	};
 
@@ -60,27 +50,22 @@ function initApp(ev){
 		urls = $.extend(true, {
 			'scores/new' : app.scoreController.create,
 			'scores/:id/edit' : app.scoreController.edit,
-
 			'composers/new' : app.composerController.create,
 			'composers/:id/edit' : app.composerController.edit,
-
 			'lyricists/new' : app.lyricistController.create,
 			'lyricists/:id/edit' : app.lyricistController.edit,
-
+			'choirTypes/new' : app.choirTypeController.create,
+			'choirTypes/:id/edit' : app.choirTypeController.edit,	
+			'styles/new' : app.styleController.create,
+			'styles/:id/edit' : app.styleController.edit,	
+			'languages/new' : app.languageController.create,
+			'languages/:id/edit' : app.languageController.edit,
 			'cupboards/new' : app.cupboardController.create,
 			'cupboards/:id/edit' : app.cupboardController.edit,
-
 			'boxes/new' : app.boxController.create,
-			'boxes/:id/edit' : app.boxController.edit,
-
-			'languages/new' : app.languageController.create,
-			'languages/:id/edit' : app.languageController.edit	,
-
-			'styles/new' : app.styleController.create,
-			'styles/:id/edit' : app.styleController.edit		
+			'boxes/:id/edit' : app.boxController.edit
 		}, urls);
 	}
-
 	routie(urls);
 
 	//Events

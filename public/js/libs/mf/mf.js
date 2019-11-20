@@ -74,13 +74,20 @@
         //Initialize data
         function init(){
 
+			var preparedUrl = urlRoot;
+			if (preparedUrl.slice(-1) !== '/') {
+				preparedUrl = preparedUrl + '/';
+			}
+			var slashEnd = window.settings.add_slash_at_the_end ? '/' : '';
+
             //Prepare url - Per no tenir problemes amb la barra final.
             if (self.content && self.content.id){
                 self.id = parseInt(self.content.id);
-                self.url = urlRoot + self.id + '/';
+                self.url = preparedUrl + self.id + slashEnd;
             }
-            else if (self.id) 
-                self.url = urlRoot + self.id + '/';
+            else if (self.id) {
+				self.url = preparedUrl + self.id + slashEnd;
+			}
             else if (self.url) {
                 self.id = self.url.match(/\d*(\/?)$/)[0];
                 if (isNaN(self.id))
@@ -383,7 +390,7 @@
             SelfModel.urlRoot = url;  
         }
 
-        function get (_options) {
+        function get(_options) {
             var _defaults = {
                 key : 'id',
                 identifier : 0,
