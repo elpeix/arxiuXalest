@@ -143,13 +143,14 @@ abstract class Service {
     protected function setPagination(array $params) {
         $perPage = MAX_PER_PAGE;
         if (isset($params['perPage']) && intVal($params['perPage'] > 0) && intVal($params['perPage']) <= $perPage) {
-            $perPage = $params['perPage'];
+            $perPage = intVal($params['perPage']);
         }
         $result = " LIMIT :limit";
-        $this->pagination['params'][':limit'] = intVal($perPage);
+        $this->pagination['params'][':limit'] = $perPage;
         if (isset($params['page']) && intVal($params['page'] > 1)) {
-            $result .= ", :offset";
-            $this->pagination['params'][':offset'] = intVal($params['page']) - 1;
+            $result .= " OFFSET :offset";
+            $offset = ((intVal($params['page']) - 1) * $perPage);
+            $this->pagination['params'][':offset'] = $offset;
         }
         $this->pagination["sql"] = $result;
     }
