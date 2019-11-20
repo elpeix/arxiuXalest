@@ -224,7 +224,7 @@
 					$box = $('<input />',{type: 'text', id: 'element_'+num}).appendTo($div);
 					if (edit){
 					    if (dataEl.type == 'collection'){
-					    	if (dataEl.valor.id)
+					    	if (dataEl.valor && dataEl.valor.id)
 	                            app[dataEl.seccio + 'Collection'].get({
 	                            	identifier: dataEl.valor.id,
 	                            	async: false,
