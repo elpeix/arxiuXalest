@@ -98,14 +98,7 @@ CREATE TABLE `scores` (
   `languageId` int(3) DEFAULT NULL,
   `cupboardId` int(2) DEFAULT NULL,
   `boxId` int(4) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `compositorsId` (`composerId`),
-  KEY `lletristesId` (`lyricistId`),
-  KEY `estilsId` (`styleId`),
-  KEY `veusId` (`choirTypeId`),
-  KEY `idiomesId` (`languageId`),
-  KEY `armarisId` (`cupboardId`),
-  KEY `caixesId` (`boxId`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=709 DEFAULT CHARSET=utf8mb4;
 -- TODO: Restore Foreing KEYS
 
