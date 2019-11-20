@@ -34,7 +34,7 @@
         <div id="content"></div>
     </div>
 
-    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/libs/routie.min.js"></script>
 
     <script type="text/javascript" src="js/app.vars.js"></script>
@@ -52,6 +52,7 @@
     <script type="text/javascript" src="js/helpers/app.resources.js"></script>
     <script type="text/javascript" src="js/helpers/app.menu.js"></script>
     <script type="text/javascript" src="js/helpers/app.filter.js"></script>
+    <script type="text/javascript" src="js/helpers/app.autocomplete.js"></script>
     <!-- Models -->
     <script type="text/javascript" src="js/app.model.js"></script>
     <script type="text/javascript" src="js/app.collections.js"></script>

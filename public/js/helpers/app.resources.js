@@ -5,20 +5,23 @@ function getAutocompleteElements(type){
 		case 'composer':
 			collection = app.composerCollection;
 			break;
-		case 'formation':
-			collection = app.formationCollection;
+		case 'lyricist':
+			collection = app.lyricistCollection;
 			break;
-		case 'publisher':
-			collection = app.publisherCollection;
+		case 'choirType':
+			collection = app.choirTypeCollection;
 			break;
-		case 'filing':
-			collection = app.filingCollection;
+		case 'style':
+			collection = app.styleCollection;
 			break;
-		case 'collection':
-			collection = app.collectionCollection;
+		case 'language':
+			collection = app.languageCollection;
 			break;
-		case 'tag':
-			collection = app.tagCollection;
+		case 'cupboard':
+			collection = app.cupboardCollection;
+			break;
+		case 'box':
+			collection = app.boxCollection;
 			break;
 		default:
 			collection = {status: 'error'};
@@ -58,7 +61,6 @@ function filterToStr(filter, reg){
 		
 		arr.push(sch + el.field + value);
 	}
-
 	return arr.join(reg);
 }
 

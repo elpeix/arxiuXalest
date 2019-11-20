@@ -60,6 +60,7 @@
 		var iden 	 = options.iden;
 		var edit	 = options.edit;
 		var type	 = options.type;
+		var newReg   = options.newReg;
 		var callback = options.callback;
 		var cancel	 = options.cancel;
 		
@@ -101,7 +102,7 @@
 			}).appendTo($form);
 
 			// Save and create new Regsiter
-			if (!edit){
+			if (!edit && newReg){
 				var $saveAndNew = $('<input />',{
 					type : "button",
 					'class' : "fr-nr",
@@ -202,9 +203,7 @@
 					break;
 
 				case 'tag':
-					$box = $('<div />',{
-						id : 'element_' + num
-					}).appendTo($field).inputTags();
+					$box = $('<div />',{id : 'element_'+num}).appendTo($field).inputTags();
 					if (edit){
 						$box.data('tagsValuePrevious', dataEl.valor);
 						for (var i=0; i < dataEl.valor.length; i++) 
@@ -221,34 +220,23 @@
 				case 'object':
 				case 'collection':
 				case 'sel':
-					$box = $('<input />',{
-						type : 'text',
-						id : 'element_' + num
-					}).appendTo($field);
+					$div = $('<div />', {'class' : 'autocomplete'}).appendTo($field);
+					$box = $('<input />',{type: 'text', id: 'element_'+num}).appendTo($div);
 					if (edit){
 					    if (dataEl.type == 'collection'){
-					    	if (dataEl.valor)
+					    	if (dataEl.valor.id)
 	                            app[dataEl.seccio + 'Collection'].get({
-	                            	identifier: dataEl.valor,
+	                            	identifier: dataEl.valor.id,
 	                            	async: false,
 	                            	success: function(dataItem){
 	                            		$box.val(dataItem.content.name? dataItem.content.name : '-');
 	                            	}
 	                            });
-					    } 
-					    else
-					        $box.val(dataEl.valor.name);
-					}
-					
-					//Autocomplete
-					$box.autocomplete({
-						minLength: 1,
-						source : getAutocompleteElements(dataEl.seccio),
-						select : function(event, ui){
-							$box.data('iden',ui.item.iden)
-								.data('valor',ui.item.value);
+					    } else {
+							$box.val(dataEl.valor.name);
 						}
-					});
+					}
+					autocomplete($box[0], getAutocompleteElements(dataEl.seccio));
 					break;
 			}
 			
@@ -296,7 +284,7 @@
 					    elVal = el.val();
 					    if (!elVal) break;
 
-                        if (elVal == el.data('valor'))
+                        if (elVal == el.data('iden'))
                             valor = el.data('iden');
                         else
                         	valor = _getResult(dataEl, elVal).id;

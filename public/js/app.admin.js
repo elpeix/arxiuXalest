@@ -6,30 +6,14 @@ $(document).ready(function(){
 
 function creamenuAdmin(element){
 	//Menu
-	$('<li>').append($('<a />',{
-		text : 'Nova partitura',
-		href : '#scores/new'
-	})).appendTo(element);
-
-	$('<li>').append($('<a />',{
-		text : 'Nou compositor',
-		href : '#composers/new'
-	})).appendTo(element);
-
-	$('<li>').append($('<a />',{
-		text : 'Nova formació',
-		href : '#formations/new'
-	})).appendTo(element);
-
-	$('<li>').append($('<a />',{
-		text : 'Nova editorial',
-		href : '#publishers/new'
-	})).appendTo(element);
-	
-	$('<li>').append($('<a />',{
-		text : 'Nou arxivador',
-		href : '#filings/new'
-	})).appendTo(element);
+	$('<li>').append($('<a />',{text: 'Nova partitura', href: '#scores/new'})).appendTo(element);
+	$('<li>').append($('<a />',{text: 'Nou compositor', href: '#composers/new'})).appendTo(element);
+	$('<li>').append($('<a />',{text: 'Nou lletrista', href: '#lyricists/new'})).appendTo(element);
+	$('<li>').append($('<a />',{text: 'Nova veu', href: '#choirTypes/new'})).appendTo(element);
+	$('<li>').append($('<a />',{text: 'Nou estil',	href: '#styles/new'})).appendTo(element);
+	$('<li>').append($('<a />',{text: 'Nou idioma',	href: '#languages/new'})).appendTo(element);
+	$('<li>').append($('<a />',{text: 'Nou armari', href: '#cupboards/new'})).appendTo(element);
+	$('<li>').append($('<a />',{text: 'Nova caixa', href: '#boxes/new'})).appendTo(element);
 
 	//Esdeveniments Menu
 	var $btn = $('#menuAdminBtn');
@@ -50,65 +34,62 @@ function creamenuAdmin(element){
 	});
 };
 
-function createElement(type, data){
+function createElement(type, data, route){
 	app.content.formulari({
 		type: type,
 		edit: false,
-		data : {
-			content : prepareContentForm(data)
-		},
-		callback : function(type, message, name, newReg){
+		newReg: type == 'scores',
+		data: {content: prepareContentForm(data)},
+		callback: function(type, message, name, newReg){
 			if (type == 'scores') {
 				data.add({
-					async : false,
-					data : message,
-					callback : function (rData){
+					async: false,
+					data: message,
+					callback: function (rData){
 						if (rData.status > 299) {
 							MF.alert('Hi ha hagut un error a l\'afegir un registre', 'error');
 							return;
 						}
-						
 						MF.alert('Registre afegit');
-						if (newReg) createElement(type, data)
-						else routie(type);
+						if (newReg) {
+							createElement(type, data, route)
+						} else {
+							routie(route);
+						}
 					}
 				});
-			}
-			else {
+			} else {
 				addElement(type, message, name, function(rData){
 					if (rData.status > 299) {
 						MF.alert('Hi ha hagut un error a l\'afegir un registre', 'error');
 						return;
 					}
-
 					MF.alert(rData.status == 100? 'Registre duplicat' : 'Registre afegit');
-					routie(type);
+					routie(route);
 				});
 			}
 		},
 		cancel : function(){
-			routie(type);
+			routie(route);
 		}
 	});
 }
 
-function editElement(type, data){
+function editElement(type, data, route){
 	app.content.formulari({
 		type: type,
 		edit: true,
-		iden : data.id,
-		data : {
-			content : prepareContentForm(data)
-		},
-		callback : function(type, iden, message){
+		iden: data.id,
+		data: {content: prepareContentForm(data)},
+		callback: function(type, iden, message){
 			data.update({
 				data: message, 
 				callback: function(rData){
-					routie(type);
+					routie(route);
 				}
 			});
 		},
-		cancel : function(){
+		cancel: function(){
 			window.history.back();
 		}
 	});
@@ -117,30 +98,27 @@ function editElement(type, data){
 function addElement(type, message, name, callback){
 	var collection = app[type + 'Collection'];
 	var result = false;
-
 	callback = callback || function(data){
 		if (data.status > 299) return;
-
-		if (data.hasOwnProperty("content"))
+		if (data.hasOwnProperty("content")) {
 			result = data.content;
-		else
+		} else {
 			result = data;
+		}
 	};
-
-	if (name && name !== "")
+	if (name && name !== "") {
 		var isDuplicate = collection.isDuplicate('name', name);
-
+	}
 	if (isDuplicate) {
 		result = {id: isDuplicate, name: name, status: 100};
 		callback(result);
-	}
-	else
+	} else {
 		collection.create({
 			async: false,
 			data: message,
 			callback: callback
 		});
-
+	}
 	return result;
 }
 
@@ -154,9 +132,9 @@ function prepareContentForm(data){
 			seccio: k,
 			iden: 0
 		};
-		if (data.content) 
+		if (data.content) {
 			obj.valor = data.content[k];
-
+		}
 		content.push(obj);
 	}
 	return content;

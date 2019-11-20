@@ -9,7 +9,7 @@
 		var defaults = {
 			page: 1,
 			maxResults: 20,
-			orderBy: '_name asc',
+			orderBy: 'name_asc',
 			filter: app.filter,
 			views : {
 				name: '',
