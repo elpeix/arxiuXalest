@@ -50,7 +50,6 @@ input[type="button"]:active{
     border-bottom: 10px solid #ddd;
 	padding: 20px;
 	text-align: left;
-	overflow:hidden;
 	margin: 0 -10px -10px;
 }
 .fr-element{
@@ -180,4 +179,40 @@ button{
 	background-image: -ms-linear-gradient(top,#d56,#e46);
 	background-image: -o-linear-gradient(top,#d56,#e46);
 	background-image: linear-gradient(top,#d56,#e46);
+}
+
+
+/* ------------------------------------------- */
+/*the container must be positioned relative:*/
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
 }

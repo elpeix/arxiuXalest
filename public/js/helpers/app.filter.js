@@ -89,7 +89,6 @@
 		}
 
 		function paintTagFilter($container) {
-
 			for (var i=0; i < dataTag.length; i++) {
 				var $tagItem = $('<div />',{
 					'class' : 'llista-filtre-cont-el'
@@ -112,7 +111,6 @@
 					if (load && typeof load === 'function') load(data);
 				}).prependTo($tagItem);
 			}
-
 		}
 		
 		function paintFilter($container, dataFilter, index){
