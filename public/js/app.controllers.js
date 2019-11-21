@@ -14,7 +14,12 @@ app.homeController = MF.Controller({
 app.scoreController = MF.Controller({
 	list: function(){
 		app.menu.mainMenu('active', 'scores');
-		app.content.listScores();
+
+		var options = {};
+		if (localStorage && localStorage.hasOwnProperty('scoreColViews')) {
+			options.views = JSON.parse(localStorage.getItem('scoreColViews'));
+		}
+		app.content.listScores(options);
 	},
 	
 	create: function(){

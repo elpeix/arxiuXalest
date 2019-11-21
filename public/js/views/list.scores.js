@@ -17,9 +17,9 @@
 				century: '',
 				style: '',
 				language: '',
-				choirType : '',
-				lyricist: '',
-				cupboard: '',
+				choirType : 'hide',
+				lyricist: 'hide',
+				cupboard: 'hide',
 				box : ''
 			}
 		};
@@ -83,7 +83,6 @@
 		
 		//Public methods
 		function init(){
-			
 			clean();
 
 			//Header
@@ -218,6 +217,9 @@
 							views[k] = 'hide';
 							element.find('.llista-' + k).addClass('hide');
 							$this.addClass('hide');
+						}
+						if (localStorage) {
+							options.views = localStorage.setItem('scoreColViews', JSON.stringify(views));
 						}
 	                }
 				}).appendTo(menuviewCont).data('fieldName', k);

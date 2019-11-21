@@ -13,7 +13,7 @@ define('MAX_PER_PAGE', 1000);
 
 define('DEFAULT_LANGUAGE', 'ca');
 
-define('DEVEL', TRUE);
+define('DEVEL', FALSE);
 
 define('ROOT_PATH', __DIR__ . '/../..');
 define('SRC_PATH', ROOT_PATH . '/src');
