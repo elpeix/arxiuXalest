@@ -1,5 +1,5 @@
 var Score = MF.Model.extend({
-    urlRoot: uriREST + 'scores',
+    basePath: 'scores',
     schema: {
         id: {isPublic: false, type: 'number', tr: 'Id'},
         name: {isPublic: true,  type: 'string', tr: 'Nom', orderField: 'scores.name'},
@@ -14,49 +14,49 @@ var Score = MF.Model.extend({
     }
 });
 var Composer = MF.Model.extend({
-    urlRoot: uriREST + 'composers',
+    basePath: 'composers',
     schema: {
         id: { isPublic: false, type: 'number', tr: 'Id'},
         name: { isPublic: true, type: 'string', tr: 'Nom'},
     }
 });
 var Lyricist = MF.Model.extend({
-    urlRoot: uriREST + 'lyricists',
+    basePath: 'lyricists',
     schema: {
         id: { isPublic: false, type: 'number', tr: 'Id'},
         name: { isPublic: true, type: 'string', tr: 'Nom'},
     }
 });
 var ChoirType = MF.Model.extend({
-    urlRoot: uriREST + 'choirTypes',
+    basePath: 'choirTypes',
     schema: {
         id: { isPublic: false, type: 'number', tr: 'Id'},
         name: { isPublic: true, type: 'string', tr: 'Nom'},
     }
 });
 var Style = MF.Model.extend({
-    urlRoot: uriREST + 'styles',
+    basePath: 'styles',
     schema: {
         id: { isPublic: false, type: 'number', tr: 'Id'},
         name: { isPublic: true, type: 'string', tr: 'Nom'},
     }
 });
 var Language = MF.Model.extend({
-    urlRoot: uriREST + 'languages',
+    basePath: 'languages',
     schema: {
         id: { isPublic: false, type: 'number', tr: 'Id'},
         name: { isPublic: true, type: 'string', tr: 'Nom'},
     }
 });
 var Cupboard = MF.Model.extend({
-    urlRoot: uriREST + 'cupboards',
+    basePath: 'cupboards',
     schema: {
         id: { isPublic: false, type: 'number', tr: 'Id'},
         name: { isPublic: true, type: 'string', tr: 'Nom'},
     }
 });
 var Box = MF.Model.extend({
-    urlRoot: uriREST + 'boxes',
+    basePath: 'boxes',
     schema: {
         id: { isPublic: false, type: 'number', tr: 'Id'},
         name: { isPublic: true, type: 'string', tr: 'Nom'},

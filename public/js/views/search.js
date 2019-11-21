@@ -69,26 +69,29 @@
 				submit : function(){
 					var inputVal = $input.val();
 					if (inputVal){
-						app.filter = [[
-							{
-								sch : 'score',
-								field: 'name',
-								type : 'like',
+						if (app.advancedFilter) {
+							app.filter = [[
+								{
+									sch : 'score',
+									field: 'name',
+									type : 'like',
+									val : inputVal
+								},
+								{
+									sch : 'composer',
+									field: 'name',
+									type : 'like',
+									val : inputVal
+								}
+							]];
+						} else {
+							app.filter = [{
+								sch : 'name',
+								field: 'scores.name',
+								type : '',
 								val : inputVal
-							},
-							{
-								sch : 'composer',
-								field: 'name',
-								type : 'like',
-								val : inputVal
-							},
-							{
-								sch : 'score',
-								field: 'reference',
-								type : 'like',
-								val : inputVal
-							}
-						]];
+							}];
+						}
 						routie('scores');
 					}
 				}

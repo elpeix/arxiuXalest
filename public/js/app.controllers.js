@@ -36,7 +36,7 @@ app.scoreController = MF.Controller({
 			identifier: id,
 			success: function(data) {
 				app.header.text('Edita la partitura: ' + data.content.name);
-				editElement('score', data, 'scores');
+				editElement('score', data, 'scores/' + id);
 			}
 		});
 	}

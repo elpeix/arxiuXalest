@@ -347,12 +347,13 @@
 								var str = dataItem.content.name? dataItem.content.name : '-';
 								$field.text(str).addClass('link').click(function(){
 								var k = $(this).data('fieldName');
-								app.filter.push([{
+								var field = app[k + 'Collection'].model.prototype.basePath + ".id";
+								app.filter.push({
 									sch : k,
-									field:  k,
+									field:  field,
 									type : 'equal',
 									val : dataItem.content.id
-								}]);
+								});
 								init();
 								});
 								$('<span class="ui-icon ui-icon-search" />').prependTo($field); 

@@ -42,7 +42,7 @@ function getAutocompleteElements(type){
 
 function filterToStr(filter, reg){
 	var arr = [];
-	if (!reg) reg = '&';
+	if (!reg) reg = '$';
 
 	for (var i = 0; i < filter.length; i++) {
 		var el = filter[i];
