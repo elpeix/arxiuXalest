@@ -1,4 +1,4 @@
-window.uriREST = 'http://127.0.0.1:8080/';
+window.uriREST = '';
 window.settings = {
   items_name: "items",
   add_slash_at_the_end: false
