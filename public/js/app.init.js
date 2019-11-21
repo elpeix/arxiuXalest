@@ -74,4 +74,12 @@ function initApp(ev){
 	});
 
 	app.load.fadeOut();
+
+	$('#logout').on('click', function(event){
+		event.preventDefault();
+		var request = $.post("/logout");
+        request.always(function(response){
+            window.location = "";
+        });
+	});
 }
