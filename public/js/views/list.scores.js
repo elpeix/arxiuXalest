@@ -17,9 +17,9 @@
 				century: '',
 				style: '',
 				language: '',
-				choirType : '',
-				lyricist: '',
-				cupboard: '',
+				choirType : 'hide',
+				lyricist: 'hide',
+				cupboard: 'hide',
 				box : ''
 			}
 		};
