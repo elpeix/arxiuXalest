@@ -84,11 +84,11 @@ function MFConnection(externalUrl){
 			}
 		}
 		request = $.ajax({
-			type	: 'GET',
-			async 	: async,
-			url		: url,
-			error 	: function(rData){data = _result(rData); if (callback) callback(data);},
-			success : function(rData){data = _result(rData); if (callback) callback(data);}
+			type: 'GET',
+			async: async,
+			url: _getRESTUrl(),
+			error: function(rData){data = _result(rData); if (callback) callback(data);},
+			success: function(rData){data = _result(rData); if (callback) callback(data);}
 		});
 	}
 	function getText(async, callback){
@@ -98,17 +98,15 @@ function MFConnection(externalUrl){
 				callback = async;
 				async = true;
 			}
-		}
-		if (!url) setUrl(externalUrl);
-		
+		}		
 		var handleStateChange = function () {
 			switch (xhr.readyState) {
-				case 0 : // UNINITIALIZED
-		      	case 1 : // LOADING
-		      	case 2 : // LOADED
-		      	case 3 : // INTERACTIVE
+				case 0: // UNINITIALIZED
+		      	case 1: // LOADING
+		      	case 2: // LOADED
+		      	case 3: // INTERACTIVE
 		      		break;
-		      	case 4 : // COMPLETED
+		      	case 4: // COMPLETED
 		      		if (callback)
 		      			callback({
 		      				status : xhr.status, 
@@ -127,7 +125,7 @@ function MFConnection(externalUrl){
 		
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = handleStateChange;
-		xhr.open('GET', url, async);
+		xhr.open('GET', _getRESTUrl(), async);
 		xhr.send(null);
 		
 	}
@@ -140,14 +138,13 @@ function MFConnection(externalUrl){
 				async = true;
 			}
 		}
-		if (!url) setUrl(externalUrl);
 		request = $.ajax({
-			type	: 'POST',
-			async 	: async,
-			data	: message,
-			url		: url,
-			error 	: function(rData){if (callback)callback(_result(rData));},
-			success : function(rData){if (callback)callback(_result(rData));}
+			type: 'POST',
+			async: async,
+			data: message,
+			url: _getRESTUrl(),
+			error: function(rData){if (callback)callback(_result(rData));},
+			success: function(rData){if (callback)callback(_result(rData));}
 		});
 	}
 	function putFormData(message, async, callback){
@@ -165,7 +162,6 @@ function MFConnection(externalUrl){
 				async = false;
 			}
 		}
-		if (!url) setUrl(externalUrl);
 		
 		//Create FormData
 		var formData = new FormData();
@@ -175,12 +171,12 @@ function MFConnection(externalUrl){
 		
 		var handleStateChange = function () {
 			switch (xhr.readyState) {
-				case 0 : // UNINITIALIZED
-		      	case 1 : // LOADING
-		      	case 2 : // LOADED
-		      	case 3 : // INTERACTIVE
+				case 0: // UNINITIALIZED
+		      	case 1: // LOADING
+		      	case 2: // LOADED
+		      	case 3: // INTERACTIVE
 		      		break;
-		      	case 4 : // COMPLETED
+		      	case 4: // COMPLETED
 		      		if (callback){
 		      			var rData = {};
 						if (xhr.status > 299) {
@@ -209,7 +205,7 @@ function MFConnection(externalUrl){
 		//XHMLHttpRequest
 		var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = handleStateChange;
-		xhr.open(type, url, async);
+		xhr.open(type, _getRESTUrl(), async);
 		xhr.setRequestHeader('Accept', 'application/json');
 		xhr.setRequestHeader('X-CSRFToken', token);
 		xhr.setRequestHeader('contentType', 'application/json');
@@ -223,21 +219,19 @@ function MFConnection(externalUrl){
 				callback = async;
 				async = true;
 			}
-		}
-		if (!url) setUrl(externalUrl);
-		
+		}	
 		var method_ = 'PUT';
-		var url_ = url;
+		var url_ = _getRESTUrl();
 		if (window.APP_PSEUDO_PUT) {
 			method_ = 'POST';
 			url_ = url + '?method=PUT';
 		}
 		request = $.ajax({
-			type	: method_,
-			async 	: async,
-			data	: message,
-			url	: url_,
-			error 	: function(rData){if (callback)callback(_result(rData));},
+			type: method_,
+			async: async,
+			data: message,
+			url: url_,
+			error : function(rData){if (callback)callback(_result(rData));},
 			success : function(rData){if (callback)callback(_result(rData));}
 		});
 	}
@@ -256,12 +250,11 @@ function MFConnection(externalUrl){
 				async = true;
 			}
 		}
-		if (!url) setUrl(externalUrl);
 		request = $.ajax({
 			type	: 'DELETE',
 			async 	: async,
 			data	: message,
-			url		: url,
+			url		: _getRESTUrl(),
 			error 	: function(rData){if (callback)callback(_result(rData));},
 			success : function(rData){if (callback)callback(_result(rData));}
 		});
@@ -277,6 +270,12 @@ function MFConnection(externalUrl){
 	}
 	
 	//Private Methods
+
+	function _getRESTUrl(){
+		if (!url) setUrl(externalUrl);
+		return uriREST + url;
+	}
+
 	function _result(rData){
 		var dataTmp;
 		if(dataType == 'xml')

@@ -84,12 +84,19 @@ class Score implements Model {
             DB_PREFIX.'scores.name',
             DB_PREFIX.'scores.century',
             DB_PREFIX.'cupboards.name',
+            DB_PREFIX.'cupboards.id',
             DB_PREFIX.'boxes.name', 
+            DB_PREFIX.'boxes.id', 
             DB_PREFIX.'composers.name',
+            DB_PREFIX.'composers.id',
             DB_PREFIX.'styles.name',
+            DB_PREFIX.'styles.id',
             DB_PREFIX.'languages.name',
+            DB_PREFIX.'languages.id',
             DB_PREFIX.'lyricists.name',
-            DB_PREFIX.'choirTypes.name'
+            DB_PREFIX.'lyricists.id',
+            DB_PREFIX.'choirTypes.name',
+            DB_PREFIX.'choirTypes.id'
         ];
     }
 

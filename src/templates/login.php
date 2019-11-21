@@ -20,7 +20,7 @@
     </div>
     <div id="circle"><img src="css/images/logo.png" /></div>
 
-    <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="js/libs/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="js/login.js" type="text/javascript"></script>
 </body>
 </html>

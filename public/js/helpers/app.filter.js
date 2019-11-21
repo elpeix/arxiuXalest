@@ -146,8 +146,12 @@
 					var $filterItem = $this.parent();
 					var arrTmp = [];
 					var ind = $filterItem.data('index');
-					dataFilter.splice(ind, 1);
-					_cleanFilter();
+					if (window.app.advancedFilter) {
+						dataFilter.splice(ind, 1);
+						_cleanFilter();
+					} else {
+						app.filter.splice(ind, 1);
+					}
 					
 					$filterItem.remove();
 					init();
@@ -155,7 +159,7 @@
 				}).prependTo($filterItem);
 
 				//Add
-				if (index < 1)
+				if (index < 1 && window.app.advancedFilter)
 					_add($filterItem, dataFilter[i], 1);
 			}
 		}
@@ -197,7 +201,11 @@
 			}).appendTo($select);
 			
 			for (var k in schema) {
+				console.log(schema[k].type);
 				if (!schema[k].isPublic || schema[k].type == 'tag') continue;
+				if (!window.app.advancedFilter && schema[k].type == 'collection') {
+					continue;
+				}
 				$('<option />',{
 					'class' : 'llista-filtre-cont-add-opt',
 					value : k ,
@@ -226,31 +234,41 @@
 						var obj;
 						
 						if (!$this.val()) return false;
-						switch(schema[k].type) {
-							case 'object':
-							case 'collection':
-							case 'sel':
-								obj = {
-									sch : k,
-									field : 'name',
-									type : 'like',
-									val : $this.val()
-								};
-								break;
-							default : 
-								obj = {
-									sch : 'score',
-									field : k,
-									type : 'like',
-									val : $this.val()
-								};
-								break;
+						if (window.app.advancedFilter) {
+							switch(schema[k].type) {
+								case 'object':
+								case 'collection':
+								case 'sel':
+									obj = {
+										sch : k,
+										field : 'name',
+										type : 'like',
+										val : $this.val()
+									};
+									break;
+								default : 
+									obj = {
+										sch : 'score',
+										field : k,
+										type : 'like',
+										val : $this.val()
+									};
+									break;
+							}
+
+							if (index === 0) dataFilter.push([obj]);
+							else dataFilter.push(obj);
+							_cleanFilter();
+						}
+						else {
+							app.filter.push({
+								sch : k,
+								field : 'scores.' + k,
+								type : '',
+								val : $this.val()
+							});
 						}
 
-						if (index === 0) dataFilter.push([obj]);
-						else dataFilter.push(obj);
-
-						_cleanFilter();
 						init();
 						if (load && typeof load === 'function') load(data);
 					}

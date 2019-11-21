@@ -36,7 +36,7 @@ class ScoreService extends BasicService {
         }
         $filter = array();
         $queryParams = array();
-		foreach (preg_split('/&/', $params['filter']) as $key => $value) {
+		foreach (preg_split('/\$/', $params['filter']) as $key => $value) {
             $filterItem = preg_split('/=/', $value);
             if ($this->isValid($filterItem[0]) && \trim($filterItem[1] != "")) {
                 $itemWildcard = str_replace('.', '_', $filterItem[0]);
@@ -50,7 +50,8 @@ class ScoreService extends BasicService {
                 }
             }
         }
-        if ($filter > 0) {
+
+        if (count($filter) > 0) {
             $this->sqlAdd(' WHERE ' . implode(' AND ', $filter));
         }
     }

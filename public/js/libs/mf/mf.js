@@ -45,7 +45,7 @@
         //Public methods link
         self.init           = init;
         self.destroy        = destroy;
-        self.setUrlRoot     = setUrlRoot;
+        self.setBasePath     = setBasePath;
         self.get            = get;
         self.fetch          = fetch;
         self.setContent     = setContent;
@@ -55,7 +55,7 @@
         self.sync           = sync;
         
         //Local
-        var urlRoot = self.urlRoot;
+        var basePath = self.basePath;
         var subcollections = self.constructor.subcollections || [];
         
         self.url = options.url;
@@ -74,7 +74,7 @@
         //Initialize data
         function init(){
 
-			var preparedUrl = urlRoot;
+			var preparedUrl = basePath;
 			if (preparedUrl.slice(-1) !== '/') {
 				preparedUrl = preparedUrl + '/';
 			}
@@ -115,9 +115,9 @@
             self = {};
         }
         
-        function setUrlRoot(url){
-          urlRoot = self.urlRoot = url;
-          return urlRoot;  
+        function setBasePath(url){
+          basePath = self.basePath = url;
+          return basePath;  
         }
 
         //Get - Returns itself
@@ -237,7 +237,7 @@
             var callback = _options.callback;
             
             var type = '';
-            var url = self.id? self.url : self.urlRoot;
+            var url = self.id? self.url : self.basePath;
             
             if(!self.id) type = 'post';
             else type = 'put';
@@ -257,7 +257,7 @@
                 //Update subcollections 
                 if (type == 'post') {
                     self.id = rData.id;
-                    self.url = self.urlRoot + self.id + '/';
+                    self.url = self.basePath + self.id + '/';
                     if (self.constructor.subcollections)
                         _subcollections(self.constructor.subcollections);
                 }
@@ -271,7 +271,7 @@
             for (var i=0; i < subcollections.length; i++) {
                     
                 var regInitSlash = /^\//;
-                var url_subcollection, urlRoot_subcollection;
+                var url_subcollection, basePath_subcollection;
                 var subcollection = subcollections[i];
                 
                 if (regInitSlash.test(subcollection.url_part))
@@ -280,13 +280,13 @@
                     url_subcollection = self.url + '/' + subcollection.url_part;
                 
                 url_subcollection = url_subcollection.replace('//', '/');
-                urlRoot_subcollection = url_subcollection + '/';
-                urlRoot_subcollection = urlRoot_subcollection.replace('//', '/');
+                basePath_subcollection = url_subcollection + '/';
+                basePath_subcollection = basePath_subcollection.replace('//', '/');
                 
                 self[subcollection.name] = new MF.Collection({
                     url: url_subcollection,
                     model : Model.extend({ 
-                        urlRoot : urlRoot_subcollection,
+                        basePath : basePath_subcollection,
                         subcollections: subcollection.subcollections,
                         attributes : subcollection.attributes
                     })
@@ -348,7 +348,7 @@
         self.remove         = remove;
         self.isDuplicate    = isDuplicate;
         self.reset          = reset;
-        self.setUrlRoot     = setUrlRoot;
+        self.setBasePath     = setBasePath;
         self.search         = search;
         self.getRoute       = getRoute;
             
@@ -377,7 +377,7 @@
             if(self.transformURLs) {
                 for (var tfk in self.transformURLs){
                     var rg = new RegExp("/:" + tfk + "/?", 'i');
-                    SelfModel.prototype.urlRoot = SelfModel.prototype.urlRoot.replace(rg,"/"+self.transformURLs[tfk]+"/");
+                    SelfModel.prototype.basePath = SelfModel.prototype.basePath.replace(rg,"/"+self.transformURLs[tfk]+"/");
                 }
             }
         }
@@ -386,8 +386,8 @@
             self = {};
         }
 
-        function setUrlRoot(url){
-            SelfModel.urlRoot = url;  
+        function setBasePath(url){
+            SelfModel.basePath = url;  
         }
 
         function get(_options) {

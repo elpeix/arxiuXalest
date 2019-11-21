@@ -9,7 +9,7 @@
 		var defaults = {
 			page: 1,
 			maxResults: 20,
-			orderBy: 'name_asc',
+			orderBy: 'scores.name asc',
 			filter: app.filter,
 			views : {
 				name: '',
@@ -78,6 +78,8 @@
 		var list;
 		var collection  = app.scoreCollection;
 		var items_name  = window.settings.items_name;
+		var $conTable;
+		var $table;
 		
 		//Public methods
 		function init(){
@@ -95,8 +97,8 @@
 			}).appendTo(element);
 			
 			//Table
-			var $conTable = $('<div class="llista-table" />');
-			var $table = $('<table class="llista-cont" />');
+			$conTable = $('<div class="llista-table" />');
+			$table = $('<table class="llista-cont" />');
 			
 			//Filter Bar
 			if (app.filter.length || app.filterTag.length){
@@ -120,6 +122,10 @@
 			//Header
 			$table.append(_header());
 
+			load();
+		}
+		function load() {
+			$table.find('tbody').remove();
 			//Search 
 			app.load.show();
 			collection.fetch({
@@ -230,17 +236,17 @@
 			var $line = $('<tr class="llista-line-head" />').appendTo($thead);
             
 			var arrOrder = orderBy.split(' ');
-			var typeOrder = arrOrder[0].split('__');
+			var typeOrder = arrOrder[0].split('.');
 			var schema = collection.model.prototype.schema;
 
 			for (var k in schema){
 				if (!schema[k].isPublic) continue;
-				var $field  = $('<th />',{
+				let $field  = $('<th />',{
 					'class' : 'llista-' + k + ' ' + views[k] + (typeOrder[0] == k? ' ' + arrOrder[1].toLowerCase() : ''),
 					text: schema[k].tr,
-	                click: function(){
-	                	var k = $(this).data('fieldName');
-	                    _order($(this), schema[k].type == 'collection'?  k + '__name' : k);
+	                click: function(event){
+	                	var k = $(event.target).data('fieldName');
+	                    _order($(this), schema[k].orderField);
 	                }
 				}).appendTo($line).data('fieldName', k);
 			}
@@ -298,7 +304,7 @@
 				el.addClass('desc');
                 el.find('span').addClass('ui-icon-triangle-1-n');
 			}
-			init();
+			load();
 		}
 		function _generateParams(page){
 			var arrParams = [];
@@ -341,12 +347,13 @@
 								var str = dataItem.content.name? dataItem.content.name : '-';
 								$field.text(str).addClass('link').click(function(){
 								var k = $(this).data('fieldName');
-								app.filter.push([{
+								var field = app[k + 'Collection'].model.prototype.basePath + ".id";
+								app.filter.push({
 									sch : k,
-									field:  k,
+									field:  field,
 									type : 'equal',
 									val : dataItem.content.id
-								}]);
+								});
 								init();
 								});
 								$('<span class="ui-icon ui-icon-search" />').prependTo($field); 
