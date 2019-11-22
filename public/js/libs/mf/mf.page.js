@@ -1,14 +1,5 @@
-/**
- * page resultats
- * @autor: Francesc Requesens
- * @date: 2013-10-13
- * 
- */
-
 (function($){
-	
-	$.fn.upage = function(options){
-
+	$.fn.MFPage = function(options){
 		var defaults = {
 			numItems: 0,
 			page: 1,
@@ -21,34 +12,31 @@
 			var args = Array.prototype.slice.call(arguments, 1);
 			var res;
 			this.each(function() {
-				var llista = $.data(this, 'upage');
+				var llista = $.data(this, 'MFPage');
 				if (llista && $.isFunction(llista[options])) {
 					var r = llista[options].apply(llista, args);
 					if (res === undefined)
 						res = r;
 					if (options == 'destroy')
-						$.removeData(this, 'upage');
+						$.removeData(this, 'MFPage');
 				}
 			});
 			if (res !== undefined)
 				return res;
 			return this;
 		}
-		
 		options = $.extend(defaults, options || {});
 		
 		this.each(function(i, _element) {
 			var element = $(_element);
-			var llista = new UPage(element, options);
-			
-			element.data('upage', llista); // TODO: look into memory leak implications
+			var llista = new MFPage(element, options);
+			element.data('MFPage', llista);
 			llista.init();
-		});
-		
+		});		
 		return this;
 	};
 	
-	function UPage(element, options){
+	function MFPage(element, options){
 		var t = this;
 	
 		// exports
@@ -67,20 +55,14 @@
 		
 		//Public methods
 		function init(){
-			//Pagina si és necessari
 			if (maxResults < numItems) {
-			
 				var lastPage = numItems / maxResults;
 				if (numItems % maxResults)
 					lastPage = parseInt(lastPage) + 1;
 
-				var $wrapPage = $('<div />',{
-					'class' : 'llista-wrap-pagina'
-				}).appendTo(element);
-				
-				var $page = $('<div />',{
-					'class' : 'llista-pagina'
-				}).appendTo($wrapPage);
+				element.find('.llista-wrap-pagina').remove();
+				var $wrapPage = $('<div />',{'class' : 'llista-wrap-pagina'	}).appendTo(element);
+				var $page = $('<div />',{'class' : 'llista-pagina'}).appendTo($wrapPage);
 
 				// Begin
 				$('<div />',{

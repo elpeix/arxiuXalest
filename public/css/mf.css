@@ -65,3 +65,7 @@ input[type="submit"]:active, input[type="button"]:active, button:active {padding
 .ui-icon-check { background-position: -64px -144px; }
 .ui-icon-circle-close { background-position: -32px -192px; }
 .ui-icon-trash { background-position: -176px -96px; }
+.ui-icon-arrowthickstop-1-w { background-position: -240px -48px; }
+.ui-icon-arrowthick-1-w { background-position: -96px -48px; }
+.ui-icon-arrowthickstop-1-e { background-position: -208px -48px; }
+.ui-icon-arrowthick-1-e { background-position: -32px -48px; }
