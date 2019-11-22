@@ -39,8 +39,6 @@ a:hover{
     margin: -9px 4px 0 -8px;
     width: 24px;
     background: linear-gradient(top,#666,#777);
-    background: -moz-linear-gradient(top,#666,#777);
-    background: -webkit-linear-gradient(top,#666,#777);
 }
 #username,
 #logout{
@@ -67,20 +65,11 @@ a:hover{
 }
 #horizCont{
 	background: #ddd;
-	background: linear-gradient(#ddd, #bbb);
-	background: -moz-linear-gradient(#ddd, #bbb);
-	background: -ms-linear-gradient(#ddd, #bbb);
-	background: -o-linear-gradient(#ddd, #bbb);
-	background: -webkit-linear-gradient(#ddd, #bbb);
-	
+	background: linear-gradient(#ddd, #bbb);	
 	padding: 10px;
-	
 	border-radius: 10px;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
 }
 
-/*MENUS*/
 #menu{
 	margin: 0 auto;
 	padding: 0;
@@ -88,10 +77,7 @@ a:hover{
 	text-align: center;
 	width: 700px;
 }
-#menu li{
-	float: left;
-	display: inline;
-}
+#menu li{float: left; display: inline;}
 #menu li a {
 	display: block;
 	padding: 10px 13px;
@@ -162,10 +148,8 @@ a:hover{
 /* SEARCH */
 .search-main {
     background: #eee;
-    /*box-shadow:10px 0 0 rgba(0,0,0,.1),-10px 0 0 rgba(0,0,0,.1);*/
-    /*height: 100%;*/
     left: 50%;
-    margin: 0 auto 0 -200px;
+    margin: 0 auto 0 -210px;
     position: fixed;
     top: 48px;
     bottom: 10px;
@@ -192,8 +176,6 @@ a:hover{
     z-index: -1;
     background: #444;
     background: linear-gradient(top,#444,#555);
-    background: -moz-linear-gradient(top,#444,#555);
-    background: -webkit-linear-gradient(top,#444,#555);
 }
 .cercador{
 	padding: 100px 0 0;
@@ -218,31 +200,20 @@ input[type="text"].search-text:focus{
     border-color: #888;
 }
 .search-button{
-    border:none !important;
     background-color: #18a;
-    color: #fff;
-    cursor:pointer;
     display:inline-block !important;
     padding: 7px !important;
     font-size: 1.2em !important;
-    margin: 10px 0;
+    margin: 10px 0 !important;
     width: 315px !important;
-    box-shadow: 0 3px 0 #168;
-    text-decoration: none !important;
-    border-radius: 0 !important;
+	box-shadow: 0 3px 0 #168;
+	float: none !important;
 }
 .search-button:hover{
     background-color: #29b;
-    border-color: #29b;
-}
-.search-button:active{
-    box-shadow: 0  3px 0 #29b,
-                inset 0 1px 0 #eee;
-    padding: 9px 10px 5px !important;
-}
-.search-tags {
-    margin: 50px 0 0;
-}
+    border-color: #29b;}
+.search-button:active{box-shadow: 0  3px 0 #29b, inset 0 1px 0 #eee; padding: 9px 10px 5px !important;}
+.search-tags {margin: 50px 0 0;}
 
 /*CONTAINER*/
 #container{
@@ -254,7 +225,7 @@ input[type="text"].search-text:focus{
     color: #777;
     font-size: 1.4em;
     font-weight: bold;
-    padding: 10px 0 0;
+    padding: 10px 0;
 }
 #containerHeader > span {
     color: #AAAAAA;
@@ -279,10 +250,9 @@ input[type="text"].search-text:focus{
 .llista-pre-cont{
 	background: white;
 	overflow:hidden;
-	margin: 10px 0 0;
+	margin: 0;
 	clear: both;
 }
-/*Llista Filtres*/
 .llista-filtre-show {
 	color: #aaa;
 	cursor: pointer;
@@ -291,14 +261,8 @@ input[type="text"].search-text:focus{
 	margin: -12px 0 5px;
 	text-decoration:underline;
 }
-.llista-filtre-show:hover {
-	color: #888;
-}
-.llista-filtre{
-	float:left;
-	width: 250px;
-	border-right: 1px solid #e1e1e1;
-}
+.llista-filtre-show:hover {color: #888;}
+.llista-filtre{float:left;width: 250px;border-right: 1px solid #e1e1e1;}
 .llista-filtre-title{
     background: #cf4646;
 	color: #fff;
@@ -321,8 +285,6 @@ input[type="text"].search-text:focus{
     padding: 8px;
     text-align: left;
 	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
 }
 .llista-filtre-cont-el > .ui-icon{
 	float:right;
@@ -463,7 +425,6 @@ input[type="text"].search-text:focus{
 	background: #18a;
 	cursor:default;
 	border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
 }
 .llista-line-head{
 	border-bottom: 0px solid #98babf !important;
@@ -529,14 +490,9 @@ th.desc span{
 	opacity: .2;
 	margin: 0 5px -3px 0;
 	display: inline-block;
-
 }
-.llista-cont td:hover span.ui-icon-search{
-	opacity: 0.5;
-}
-.llista-cont td span.ui-icon-search:hover{
-	opacity:0.8 !important;
-}
+.llista-cont td:hover span.ui-icon-search{opacity: 0.5;}
+.llista-cont td span.ui-icon-search:hover{opacity:0.8 !important;}
 .score-tag {
     display: inline-block;
     font-style: italic;
@@ -544,13 +500,8 @@ th.desc span{
     color: #587A7F;
     cursor: pointer;
 }
-.score-tag:hover{
-    text-decoration: underline;
-}
-th.hide,
-td.hide{
-	display:none;
-}
+.score-tag:hover{text-decoration: underline;}
+th.hide, td.hide{display:none;}
 
 .llista-edit{
 	cursor: pointer;
@@ -582,42 +533,36 @@ td.hide{
 	padding: 0px 5px;
 	width: 100px;
 }
-.llista-pagina-principi,
-.llista-pagina-final,
-.llista-pagina-ant,
-.llista-pagina-seg{
-	cursor: pointer
-}
-.llista-pagina-principi:hover,
-.llista-pagina-final:hover,
-.llista-pagina-ant:hover,
-.llista-pagina-seg:hover{
-	border-color: #444;
-}
+.llista-pagina-principi,.llista-pagina-final,.llista-pagina-ant,.llista-pagina-seg{	cursor: pointer}
+.llista-pagina-principi:hover,.llista-pagina-final:hover,.llista-pagina-ant:hover,.llista-pagina-seg:hover{	border-color: #444;}
 
 /*SCORE*/
 .score-detail {
-    /*background: white;*/
-    min-width: 300px;
-    max-width: 800px;
-    margin: auto;
+	background: #f1f1f1;
+    border: 10px solid #ddd;
+	padding: 20px 0;
+	text-align: left;
+	margin: 0 auto;
+	max-width: 600px;
 }
 .score-detail-line{
     border-bottom: 1px solid #ddd;
-    margin: 1px 0 0;
+    margin: 0 20px 0;
     padding: 8px 7px 7px;
     text-align: left;
 }
 .score-detail-line > div{
     display: inline-block;
-    min-width: 150px;
+    min-width: 85px;
 }
 .score-detail-line-title {
-    color: #888;
+	color: #888;
+	text-align: right;
+	padding: 0 15px 0 0;
 }
 .score-detail-edit {
-    text-align: left;
-    padding: 10px;
+	padding: 20px 0 3px;
+	overflow: hidden;
 }
 .score-detail-edit > button {
     margin: 0 20px 0 0 !important

@@ -79,53 +79,12 @@
 				success: function(rData){
 					app.header.text(rData.content.name);
 					app.load.hide();
-					
 					$('<span />',{text: ' > '}).prependTo(app.header);
 					$('<a />',{href : '#scores', text : 'Arxiu'}).prependTo(app.header);
+					var $cont = _paint(rData.content);
+					if (isAdmin) _getButtons().appendTo($cont);
 					var $preCont = $('<div />',{'class': 'llista-pre-cont'}).appendTo(element);
-					_paint(rData.content).appendTo($preCont);
-
-					if (isAdmin){
-						var $editCont = $('<div />',{
-							'class' : 'score-detail-edit'
-						}).appendTo($preCont);
-						
-						$('<button />',{
-							'class' : 'fr-gen',
-							text : 'Torna a l\'arxiu',
-							click : function(e){
-								routie('scores');
-
-							}
-						}).appendTo($editCont);
-						
-						$('<button />',{
-							'class' : 'fr-sv',
-							text : 'Edita',
-							click : function(e){
-								routie('scores/' + identifier + '/edit');
-							}
-						}).appendTo($editCont);
-						
-						$('<button />',{
-							'class' : 'fr-cn',
-							text : 'Elimina',
-							click : function(e){
-								e.stopPropagation();
-								MF.confirm('Vols eliminar del registre la partitura?', 'Elimina', function(r){
-									if(!r) return false;
-									rData.remove(rData.id, function(ret){
-										if(ret.status > 299)
-											MF.alert('No s\'ha pogut eliminar la partitura');
-										else{
-											MF.alert('La partirura '+rData.name+' ha estat eliminada');
-											routie('scores');
-										}
-									});
-								});
-							}
-						}).appendTo($editCont);
-					}
+					$preCont.append($cont);
 				}
 			})
 		}
@@ -213,6 +172,35 @@
 				}
 			}
 			return $container;
+		}
+
+		function _getButtons() {
+			var $buttons = $('<div class="score-detail-edit" />');
+						
+			$('<button />',{
+				'class' : 'btn-primary',
+				text : 'Edita',
+				click : function(e){routie('scores/' + identifier + '/edit');}
+			}).appendTo($buttons);
+			
+			$('<button />',{
+				'class' : 'btn-remove',
+				text : 'Elimina',
+				click : function(e){
+					e.stopPropagation();
+					MF.confirm('Vols eliminar del registre la partitura?', 'Elimina', function(r){
+						if(!r) return false;
+						rData.remove(rData.id, function(ret){
+							if(ret.status > 299) MF.alert('No s\'ha pogut eliminar la partitura');
+							else{
+								MF.alert('La partirura '+rData.name+' ha estat eliminada');
+								routie('scores');
+							}
+						});
+					});
+				}
+			}).appendTo($buttons);
+			return $buttons;
 		}
     
 		// private function for debugging

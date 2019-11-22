@@ -1,10 +1,3 @@
-/**
- * MF Connection Manager
- * 
- * @author Francesc Requesens
- * @version 1.5 - 2014-10-18
- * 
- */
 function MFConnection(externalUrl){
 	t = this;
 	
@@ -168,7 +161,6 @@ function MFConnection(externalUrl){
 		for (var item in message) {
 			formData.append(item, message[item]);
 		}
-		
 		var handleStateChange = function () {
 			switch (xhr.readyState) {
 				case 0: // UNINITIALIZED
@@ -188,7 +180,6 @@ function MFConnection(externalUrl){
 						}
 						callback(_result(rData));
 		      		}
-		      			
 		      		break;
 		      	default: 
 		      		if (callback){
@@ -260,7 +251,6 @@ function MFConnection(externalUrl){
 		});
 	}
 	function checkStatus(rData){
-		//Error
 		if (rData.status > 299){
 			var responseText = parseResponseText(rData.responseText);
 			MF.alert(responseText.message? responseText.message : responseText.code, 'error');
@@ -270,7 +260,6 @@ function MFConnection(externalUrl){
 	}
 	
 	//Private Methods
-
 	function _getRESTUrl(){
 		if (!url) setUrl(externalUrl);
 		return uriREST + url;
@@ -278,11 +267,11 @@ function MFConnection(externalUrl){
 
 	function _result(rData){
 		var dataTmp;
-		if(dataType == 'xml')
+		if (dataType == 'xml')
 			dataTmp = $(rData);
 		else if (dataType == 'text')
 			dataTmp = rData;
-		else{
+		else {
 			try {
 				dataTmp = _dataJSON(rData);
 			}
@@ -317,197 +306,14 @@ function MFConnection(externalUrl){
 			case 401:
 				MF.alert("No et trobes conectat. Surt i entra de nou", 'error');
 				dataTmp = {status : 401};
+				window.location = "";
 				//throw rData;
 				break;
 			default:
 				//Error
-				dataTmp = $.parseJSON(rData.responseText);//{status : 500};
-				//throw rData;
+				dataTmp = $.parseJSON(rData.responseText);
 				break;
 		}
 		return dataTmp;
-	}
-}
-
-/*
- * MF Alive Manager
- * 
- * @author Francesc Requesens
- * @version 1.5 - 2014-10-18
- * 
- * Dependeces: MF Connection Manager
- */
-function uAlive(){
-	var t = this;
-	
-	//Export
-	t.init 			= init;
-	t.createSession	= createSession;
-	t.die 			= die;
-	t.logged 		= logged;
-	t.user 			= getUser;
-	t.setUrl		= setUrl;
-	t.setLocation 	= setLocation;
-	
-	//Local
-	var interval;
-	var numInterval = 30 * 60 * 1000;
-	var logged 		= false;
-	var user;
-	var aliveObj;
-	var wsUrl = window.uriREST + 'users/' + userId;
-	var locationReference = 'login';
-	
-	//public methods
-	function init(){
-		_keepAlive(false);
-		interval = setInterval(function(){
-			_keepAlive(true);
-		},numInterval);
-	}
-	function createSession(str, callback){
-		if (arguments.length != 2) return false;
-		aliveObj = new uData(wsUrl);
-		aliveObj.post(str, false, callback);				
-	}
-	function die(){
-		clearInterval(interval);
-		user = "";
-		logged = false;
-		window.location.href = '/logout';
-		return true;
-	}
-	function getUser(){
-		return user;
-	}
-	function getData(){
-		return data;
-	}
-	function setUrl(url){
-		wsUrl = url;
-		return wsUrl;
-	}
-	function setLocation(locationRef){
-		locationReference = locationRef;
-		return locationReference;
-	}
-	
-	//private methods
-	function _keepAlive(async){	
-		aliveObj = new uData(wsUrl);
-		aliveObj.init(async, function(rData){
-			if (rData.status > 299){
-				window.location.href = '/logout';
-			}else{
-				user = rData;
-				logged = true;
-			}
-		});
-		return logged;
-	}
-}
-
-/*
- * MF Settings Manager
- * 
- * @author Francesc Requesens
- * @version 1.5 - 2014-10-18
- * 
- * Dependeces: MF Connection Manager
- */
-function MFSettings(name){
-	var t = this;
-	
-	// exports
-	t.init			= init;
-	t.get			= get;
-	t.set			= set;
-	
-	// imports
-	
-	// local
-	var data = {};
-	var uriSettings;
-	var urlSettings = window.uriREST + 'properties';
-	
-	// public methods
-	function init(callback) {
-		
-		if (!name) return false;
-		
-		//Search
-		var objSettings = new uData(urlSettings + '?owner=' + user.uri.match(/\d*$/)[0] + '&name=' + name);
-		objSettings.init(false, function(rData){
-			if (rData.status > 299 || !rData.items.length) {
-				return false;
-			}
-			uriSettings = rData.items[0].properties.uri;
-			data = rData.items[0].properties.map;
-			
-			if (typeof callback == 'function') {
-				callback(data);
-			}
-		});
-	}
-	function get(){		
-		if (arguments.length && arguments[0]){
-			var type = arguments[0];
-			if (data[type])
-				return data[type];
-				
-			return {};
-		}
-		return data;
-	}
-	function set(key, value, callback) {
-		
-		//Assign data key
-		data[key] = value;
-		
-		//Refresh property
-		var objData = {
-			owner : {
-				uri: user.uri
-			},
-			name : name,
-			map : data
-		};
-		
-		var message = $.toJSON(objData);
-		var objSettings;
-		
-		if (uriSettings) {
-			objSettings = new uData(uriSettings);
-			objSettings.put(message, function(rData){
-				if (rData.status > 299) {
-					if (typeof callback == 'function')
-						callback(false);
-
-					return false;
-				}
-				
-				if (typeof callback == 'function')
-					callback(rData.map);
-				
-			});
-		} 
-		else {
-			objSettings = new uData(urlSettings);
-			objSettings.post(message, function(rData){
-				if (rData.status >  299) {
-					if (typeof callback == 'function')
-						callback(false);
-
-					return false;
-				}
-				
-				uriProperties = rData.uri;
-				data = rData.map;
-				
-				if (typeof callback == 'function')
-					callback(rData.map);
-	
-			});
-		}
 	}
 }
