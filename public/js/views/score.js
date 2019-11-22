@@ -82,7 +82,7 @@
 					$('<span />',{text: ' > '}).prependTo(app.header);
 					$('<a />',{href : '#scores', text : 'Arxiu'}).prependTo(app.header);
 					var $cont = _paint(rData.content);
-					if (isAdmin) _getButtons().appendTo($cont);
+					_getButtons().appendTo($cont);
 					var $preCont = $('<div />',{'class': 'llista-pre-cont'}).appendTo(element);
 					$preCont.append($cont);
 				}
@@ -175,31 +175,37 @@
 		}
 
 		function _getButtons() {
-			var $buttons = $('<div class="score-detail-edit" />');
-						
-			$('<button />',{
-				'class' : 'btn-primary',
-				text : 'Edita',
-				click : function(e){routie('scores/' + identifier + '/edit');}
-			}).appendTo($buttons);
-			
-			$('<button />',{
-				'class' : 'btn-remove',
-				text : 'Elimina',
-				click : function(e){
-					e.stopPropagation();
-					MF.confirm('Vols eliminar del registre la partitura?', 'Elimina', function(r){
-						if(!r) return false;
-						rData.remove(rData.id, function(ret){
-							if(ret.status > 299) MF.alert('No s\'ha pogut eliminar la partitura');
-							else{
-								MF.alert('La partirura '+rData.name+' ha estat eliminada');
-								routie('scores');
-							}
+			var $buttons = $('<div class="score-detail-buttons" />');
+			if (isAdmin) {
+				$('<button />',{
+					'class' : 'btn-remove trash',
+					click : function(e){
+						e.stopPropagation();
+						MF.confirm('Vols eliminar del registre la partitura?', 'Elimina', function(r){
+							if(!r) return false;
+							rData.remove(rData.id, function(ret){
+								if(ret.status > 299) MF.alert('No s\'ha pogut eliminar la partitura');
+								else{
+									MF.alert('La partirura '+rData.name+' ha estat eliminada');
+									routie('scores');
+								}
+							});
 						});
-					});
-				}
+					}
+				}).appendTo($buttons);
+							
+				$('<button />',{
+					'class' : 'btn-primary',
+					text : 'Edita',
+					click : function(e){routie('scores/' + identifier + '/edit');}
+				}).appendTo($buttons);
+			}
+			$('<button />',{
+				'class' : 'btn-secondary go-back',
+				text : 'Torna a l\'arxiu',
+				click : function(e){routie('scores/');}
 			}).appendTo($buttons);
+
 			return $buttons;
 		}
     

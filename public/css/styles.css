@@ -6,17 +6,40 @@ a:hover{color:#333;text-decoration:underline;}
 #header{background: #eee;position:fixed;color: #444;width:100%;z-index: 10;top: 0;text-align: center;}
 #logo{float: left;font-weight:bold;line-height: 34px;margin:0 10px;}
 #circle_min {border: 3px solid #ddd;border-radius: 20px;float: left;height: 24px;margin: -9px 4px 0 -8px;width: 24px;background: linear-gradient(top,#666,#777);}
-#username, #logout{float:right;line-height: 34px;padding:0 10px;}
 #load{background:#fd5;border-radius:3px;color:#444;font-style:italic;padding:5px;position:fixed;right:10px;bottom:10px;width:200px;z-index:100;}
 
 #horiz{text-align:center;width: 400px;}
 #horizCont{background: #ddd;background: linear-gradient(#ddd, #bbb);padding: 10px;border-radius: 10px;}
 
-#menu{margin: 0 auto;padding: 0;list-style-type: none;text-align: center;width: 700px;}
-#menu li{float: left; display: block;}
-#menu li a {display: block;padding: 10px 13px;cursor: pointer;color: #666;}
-#menu li a:hover{text-decoration: none;background: #ccc;}
-#menu li.active a{background: #18a; color: #fff; text-decoration: none;}
+.header .menu {clear: both; max-height: 0; transition: max-height .2s ease-out;margin: 0 auto;padding: 0;list-style-type: none;text-align: center;overflow: hidden;}
+.header .menu-icon {cursor: pointer; display: inline-block; float: right; padding: 15px 13px; position: relative; user-select: none;}
+.header .menu-icon .navicon {background: #333; display: block; height: 2px; position: relative; transition: background .2s ease-out; width: 18px;}
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {background: #333; content: ''; display: block; height: 100%; position: absolute; transition: all .2s ease-out; width: 100%;}
+.header .menu-icon .navicon:before {top: 5px;}
+.header .menu-icon .navicon:after {top: -5px;}
+.header .menu-btn {display: none;}
+.header .menu-btn:checked ~ .menu {max-height: 420px;}
+.header .menu-btn:checked ~ .menu-icon .navicon {background: transparent;}
+.header .menu-btn:checked ~ .menu-icon .navicon:before {transform: rotate(-45deg);}
+.header .menu-btn:checked ~ .menu-icon .navicon:after {transform: rotate(45deg);}
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before, .header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {top: 0;}
+.menu li a {display: block; padding: 10px 20px; cursor: pointer; color: #666;}
+.menu li a:hover{text-decoration: none;background: #ccc;}
+.menu li.active a{background: #18a; color: #fff; text-decoration: none;}
+.menu-static.user {display: none;}
+.menu-static.logout a {background:#c8a}
+.menu-static.logout a:hover {background:#d9b}
+
+/* 48em = 768px */
+@media (min-width: 48em) {
+  .header li {float: left;}
+  .header li a {padding: 10px 13px;}
+  .header .menu {clear: none;max-height: none; margin-left:200px !important;}
+  .header .menu-icon {display: none;}
+  .header .menu .menu-static {float:right;}
+  .menu-static.user {margin-left: 20px;display: block;}
+}
 
 #menuAdminLauncher {float: left;}
 #menuAdminBtn {background: #777;color: #fff;margin: 5px;padding: 3px 10px;border-radius: 3px;cursor: pointer;}
@@ -124,5 +147,8 @@ th.hide, td.hide{display:none;}
 .score-detail-line{border-bottom: 1px solid #ddd;margin: 0 20px 0;padding: 8px 7px 7px;text-align: left;}
 .score-detail-line > div{display: inline-block;min-width: 85px;}
 .score-detail-line-title {color: #888;text-align: right;padding: 0 15px 0 0;}
-.score-detail-edit {padding: 20px 0 3px;overflow: hidden;}
-.score-detail-edit > button {margin: 0 20px 0 0 !important}
+.score-detail-buttons {padding: 20px 0 3px;overflow: hidden;}
+.score-detail-buttons > button {margin: 0 20px 0 0 !important}
+.score-detail-buttons > button.go-back {float: left; margin-left:20px !important;}
+.score-detail-buttons > button.trash {padding: 5px 10px !important;}
+.score-detail-buttons > button.trash::after {display:block;content:' ';overflow: hidden;background-repeat: no-repeat; width: 16px; height: 16px;background-image: url(images/icons.png);float: right;background-position: -176px -96px;filter: invert(100%);}
