@@ -317,6 +317,7 @@ function MFConnection(externalUrl){
 			case 401:
 				MF.alert("No et trobes conectat. Surt i entra de nou", 'error');
 				dataTmp = {status : 401};
+				routie.reload();
 				//throw rData;
 				break;
 			default:

@@ -69,17 +69,14 @@
 		
 		//Public methods
 		function init(){
-			//Role
-			//TODO
+			//Role - TODO
 
-			//Control data
-			if (!data.content.length)
+			if (!data.content.length) {
 				return false;
-			
-			//Clean element
+			}
+
 			clean();
 			
-			//Create Container
 			var $form = $('<form />', {
 				id : "formulari",
 				'class' : "fr"
@@ -89,29 +86,32 @@
 			for (var i = 0; i < data.content.length; i++)
 				$form.append(_paint(data.content[i], i));
 
+			
+			var $formButtons = $('<div />',{'class' :"fr-buttons"}).appendTo($form);
 			// Save
 			$('<input />',{
 				type : "submit",
-				'class' :"fr-sv",
+				'class' :"btn-primary",
 				value : "Desa",
 				click : function(e){
 					e.stopPropagation();
 					e.preventDefault();
 					_save();
 				}
-			}).appendTo($form);
+			}).appendTo($formButtons);
+
 
 			// Save and create new Regsiter
 			if (!edit && newReg){
 				var $saveAndNew = $('<input />',{
 					type : "button",
-					'class' : "fr-nr",
+					'class' : "btn-secondary",
 					value : "Desa i crea nou registre",
 					click : function(e){
 						e.stopPropagation();
 						_save(true);
 					}
-				}).appendTo($form);
+				}).appendTo($formButtons);
 
 				$form.keypress(function(e){
 					if(e.controlkey && e.which == 13)
@@ -122,13 +122,13 @@
 			//Cancel
 			$('<input />', {
 				type : "button",
-				'class' : "fr-cn",
+				'class' : "btn-cancel",
 				value : "Cancel·la",
 				click : function(e){
 					e.stopPropagation();
 					cancel();
 				}
-			}).appendTo($form);
+			}).appendTo($formButtons);
 			
 			$('#element_0').focus();
 		}
