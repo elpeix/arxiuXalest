@@ -43,7 +43,6 @@
     <script type="text/javascript" src="js/libs/mf/mf.alerts.js"></script>
     <script type="text/javascript" src="js/libs/mf/mf.connection.js"></script>
     <script type="text/javascript" src="js/libs/mf/mf.form.js"></script>
-    <script type="text/javascript" src="js/libs/mf/mf.elements.tags.js"></script>
     <script type="text/javascript" src="js/libs/mf/mf.page.js"></script>
     <script type="text/javascript" src="js/libs/mf/mf.viewlist.js"></script>
     <script type="text/javascript" src="js/libs/mf/mf.controller.js"></script>

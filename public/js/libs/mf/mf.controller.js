@@ -1,6 +1,3 @@
-/**
- * MF Controllers
- */
 (function(){
     'use strict';
 
@@ -36,7 +33,6 @@
 			this.destroy();
 			throw "Invalid collection";
 		}
-		
 		this.collection = collection;
 	};
 
@@ -55,8 +51,6 @@
 	MF.Controller = function(props){
 		if (!props.collection || typeof props.collection !== 'object')
 			return new (MF.BasicController.extend(props))();
-
 		return new (MF.CollectionController.extend(props))(props.collection);
 	}
-
 }).call(this);
