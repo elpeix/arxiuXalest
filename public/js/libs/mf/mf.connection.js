@@ -304,10 +304,10 @@ function MFConnection(externalUrl){
 				dataTmp = {status : 204};
 				break;
 			case 401:
-				MF.alert("No et trobes conectat. Surt i entra de nou", 'error');
+				MF.bigAlert('No et trobes conectat. Redirigint a la pantalla de login', function() {
+					window.location = "";
+				});
 				dataTmp = {status : 401};
-				window.location = "";
-				//throw rData;
 				break;
 			default:
 				//Error

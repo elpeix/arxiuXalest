@@ -21,56 +21,54 @@
 				},2000 + message.length * 50); // Message length defines the alert duration.
 			}			
 		},
+		bigAlert: function(message, callback) {
+			var cont = this._createBox(message);
+			window.setTimeout(function(){
+				$.mfAlert._hideBox();
+				if(callback && typeof callback === 'function') callback();
+			},2000 + message.length * 50); // Message length defines the alert duration.	
+		},
 		confirm: function(message, btnStr, callback) {
-			$.mfAlert._hideConfirm();
-			$.mfAlert._overlay('show');
-			var cont = $('<div id="mfConfirm" class="mf-confirm" />');
-			var text = $('<div class="mf-confirmText" />');
-			var ok = $('<input type="button" value="'+btnStr+'" class="btn-primary" />');
-			var cn = $('<input type="button" value="Cancel&middot;la" class="btn-cancel" />');
-
-			cont.append(text)
-				.append(ok)
-				.append(cn)
-				.appendTo($("body"));
-
-			text.html(message.replace(/\n/g, '<br />'));
-			ok.click( function() {
-				ret(true);
-			});
-			cn.click( function() {
-				ret(false);
-			});
-			ok.focus();
+			var cont = this._createBox(message);
+			var ok = $('<input type="button" value="'+btnStr+'" class="btn-primary" />').appendTo(cont);
+			var cn = $('<input type="button" value="Cancel&middot;la" class="btn-cancel" />').appendTo(cont);
+			ok.on('click', function() {ret(true);});
+			cn.on('click', function() {ret(false);});
 			cont.keypress( function(e) {
-				//if( e.keyCode == 13 ) ret(true);
 				if( e.keyCode == 27 ) ret(false);
 			});
+			ok.focus();
 			function ret(r){
-				$.mfAlert._hideConfirm();
+				$.mfAlert._hideBox();
 				if(callback) callback(r);
 			}
 		},
 		
 		//Private methods
-		_hideConfirm: function(){
-			$("#mfConfirm").animate({
+		_createBox: function(message) {
+			$.mfAlert._hideBox();
+			$.mfAlert._overlay('show');
+			var cont = $('<div class="mf-box" />');
+			var text = $('<div class="mf-box-text" />').appendTo(cont);
+			text.html(message.replace(/\n/g, '<br />'));
+			cont.appendTo($("body"));
+			return cont;
+		},
+
+		_hideBox: function(){
+			$(".mf-box").animate({
 				opacity: 0
 			},120,"swing",function(){$(this).remove();});
 			$.mfAlert._overlay('hide');
 		},
 		_overlay: function(status){
-			switch( status ) {
-				case 'show':
-					$.mfAlert._overlay('hide');
-					$("body").append('<div class="mf-alertBlank" />');
-				break;
-				case 'hide':
-					$(".mf-alertBlank").animate({
-						opacity: 0
-					},120,"swing",function(){$(this).remove();});
-				break;
+			if (status == "show") {
+				$.mfAlert._overlay('hide');
+				var overlay = $('<div class="mf-overlay" />').appendTo($('body'));
+				overlay.on('click', $.mfAlert._hideBox);
+				return;
 			}
+			$(".mf-overlay").animate({opacity: 0},120,"swing",function(){$(this).remove();});
 		}
 	};
 	
@@ -78,6 +76,9 @@
 	window.MF.alert = function(message, type, val){
 		if (val) message = message.replace(/%s/, val);
 		$.mfAlert.alert(message, type);
+	};
+	window.MF.bigAlert = function(message,callback){
+		$.mfAlert.bigAlert(message, callback);
 	};
 	window.MF.confirm = function(message, btnStr, callback){
 		if(typeof(arguments[1]) == 'function'){
