@@ -7,21 +7,21 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-    <div id="header">
-        <div id="logo">
-            <a href=""><?=$appName?></a>
-        </div>
+    <div id="header" class="header">
+        <div id="logo"><a href=""><?=$appName?></a></div>
         <?php if($user->level == 1) { ?>
         <div id="menuAdminLauncher">
             <div id="menuAdminBtn"><?=$language['add']?></div>
             <ul id="menuAdmin"></ul>
         </div>
         <?php } ?>
-        <div id="logout"><a href="#" title="<?=$language['logout']?>"><?=$language['logout']?></a></div>
-        <div id="user">
-            <div id="username"><?=$user->firstName?> <?=$user->lastName?></div>
-        </div>
-        <ul id="menu"></ul>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul id="menu" class="menu">
+            
+            <li id="logout" class="menu-static logout"><a href="#" title="<?=$language['logout']?>"><?=$language['logout']?></a></li>
+            <li id="user" class="menu-static user"><a href="#user" id="username"><?=$user->firstName?> <?=$user->lastName?></a></li>
+        </ul>
     </div>
 
     <div id="container">

@@ -41,8 +41,8 @@ input[type="submit"]:active, input[type="button"]:active, button:active {padding
 .btn-primary:hover{background-color: #29b;border-color: #29b;}
 .btn-primary:active{box-shadow: 0 3px 0 #29b, inset 0 1px 0 #eee;}
 .btn-secondary{background-color: #5a3; box-shadow: 0 3px 0 #381;}
-.btn-secondary:hover{background-color: #381; border-color: #381;}
-.btn-secondary:active{box-shadow: 0 3px 0 #381, inset 0 1px 0 #eee;}
+.btn-secondary:hover{background-color: #5b3; border-color: #5b3;}
+.btn-secondary:active{box-shadow: 0 3px 0 #5b3, inset 0 1px 0 #eee;}
 .btn-cancel{background: #888; box-shadow: 0 3px 0 #666;}
 .btn-cancel:hover{background-color:#999; border-color: #999;}
 .btn-cancel:active{box-shadow: 0 3px 0 #999, inset 0 1px 0 #eee;}
