@@ -1,5 +1,5 @@
 html {margin:0;padding: 0;height: 100%;}
-body {background: #fafafa;margin: 0;padding: 0;margin-bottom: 6px;color: #777;font-size:12px;font-family: Arial, Helvetica, sans-serif;text-align: center;height: 100%;overflow: hidden;}
+body {background: #fafafa;margin: 0;padding: 0;margin-bottom: 6px;color: #777;font-size:12px;font-family:sans-serif, Arial, Helvetica;text-align: center;height: 100%;overflow: hidden;}
 #main {background: #eee;background: rgba(200,200,200,0.2);width: 300px;margin:0 auto;height: 100%;border: 10px solid #ddd;border-top: none;border-bottom: none;}
 #circle {position: fixed;bottom: 40px;left: 50%;border:solid 10px #ddd;border-radius: 90px;width: 100px;margin-left: -60px;height: 100px;z-index: -1;background: #444;background: linear-gradient(top,#444,#555);background: -moz-linear-gradient(top,#444,#555);background: -webkit-linear-gradient(top,#444,#555);}
 h1{margin: 0;padding: 40px 0 60px;}

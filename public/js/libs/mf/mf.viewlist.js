@@ -60,7 +60,7 @@ MF.ViewList = function(element, options){
 				if (numItems){
 					var $list = $('<tbody />').appendTo(table);
 
-					$preCont.upage({
+					$preCont.MFPage({
 						numItems: rData.count,
 						page: page,
 						next: rData.next,

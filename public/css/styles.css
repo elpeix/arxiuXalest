@@ -1,13 +1,13 @@
 html{overflow-y:scroll;}
-html, body{font-family: 'Open Sans', sans-serif;font-size: 0.9em;background: #fafafa;}
-a:link, a:visited{color: #777;text-decoration: none;}
-a:hover{color: #333;text-decoration: underline;}
+html, body{font-family:sans-serif, Arial, Helvetica;font-size: 0.9em;background: #fafafa;}
+a:link, a:visited{color: #777;text-decoration:none;}
+a:hover{color:#333;text-decoration:underline;}
 
 #header{background: #eee;position:fixed;color: #444;width:100%;z-index: 10;top: 0;text-align: center;}
 #logo{float: left;font-weight:bold;line-height: 34px;margin:0 10px;}
 #circle_min {border: 3px solid #ddd;border-radius: 20px;float: left;height: 24px;margin: -9px 4px 0 -8px;width: 24px;background: linear-gradient(top,#666,#777);}
-#username, #logout{float:right;line-height: 34px;padding: 0 10px;}
-#load{background: #ffcc3b;border-radius: 3px;color: #444;font-style: italic;padding: 5px;position: fixed;right: 10px;top: 48px;width: 200px;}
+#username, #logout{float:right;line-height: 34px;padding:0 10px;}
+#load{background:#fd5;border-radius:3px;color:#444;font-style:italic;padding:5px;position:fixed;right:10px;bottom:10px;width:200px;z-index:100;}
 
 #horiz{text-align:center;width: 400px;}
 #horizCont{background: #ddd;background: linear-gradient(#ddd, #bbb);padding: 10px;border-radius: 10px;}
@@ -36,21 +36,7 @@ input.search-text:focus{outline: none;}
 input[type="text"].search-text{border: 1px solid #ccc;padding: 7px !important;margin:5px !important;font-size: 1.1em !important;width: 300px !important;}
 input[type="text"].search-text:hover{border-color: #aaa;}
 input[type="text"].search-text:focus{border-color: #888;}
-.search-button{
-    background-color: #18a;
-    display:inline-block !important;
-    padding: 7px !important;
-    font-size: 1.2em !important;
-    margin: 10px 0 !important;
-    width: 315px !important;
-	box-shadow: 0 3px 0 #168;
-	float: none !important;
-}
-.search-button:hover{
-    background-color: #29b;
-	border-color: #29b;
-}
-.search-button:active{box-shadow: 0  3px 0 #29b, inset 0 1px 0 #eee; padding: 9px 10px 5px !important;}
+.search-button{display:inline-block !important; padding: 7px !important; font-size: 1.2em !important; margin: 10px 0 !important; width: 315px !important;box-shadow: 0 3px 0 #168;float: none !important;}
 .search-tags {margin: 50px 0 0;}
 
 #container{margin-top: 37px;padding: 0 10px 10px;text-align: center;}
@@ -101,6 +87,11 @@ input[type="text"].search-text:focus{border-color: #888;}
 .llista-head th{color: #fff;padding: 6px 5px;}
 .llista-head th:hover{background-color: rgba(255,255,255,0.3);}
 .llista-head th:active{background-color: rgba(0,0,0,0.1);}
+.llista-head th::after {display: block;content: ' ';overflow: hidden; background-repeat: no-repeat; width: 16px; height: 16px;background-image: url(images/icons.png);float: right; opacity: 0.5;}
+.llista-head th::after { background-position: -128px -16px; }
+.llista-head th.llista-edit::after {background: none;}
+.llista-head th.asc::after{ background-position: 0 -16px; }
+.llista-head th.desc::after { background-position: -64px -16px; }
 th.llista-edit{background:none !important;}
 th span{float:left;display:none !important;margin:-3px 3px 0 0;}
 th.asc span,th.desc span{display:block !important;}
@@ -122,7 +113,7 @@ th.hide, td.hide{display:none;}
 
 .llista-edit{cursor: pointer;opacity: 0.4;width: 16px;}
 .llista-edit:hover{opacity: 1;}
-.llista-wrap-pagina {text-align: center;background: #bbb;padding: 3px 0;}
+.llista-wrap-pagina {text-align: center;background: #ddd;padding: 3px 0;}
 .llista-pagina{display: flex;margin: auto;width: 214px;}
 .llista-pagina div{background-color: #fff;border: 1px solid #eee;display: block !important;margin: 3px;border-radius: 2px;}
 .llista-pagina-text{height: 16px;padding: 0px 5px;width: 100px;}

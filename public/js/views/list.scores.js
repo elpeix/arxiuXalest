@@ -138,7 +138,7 @@
 						var $list = $('<tbody />').appendTo($table);
 						
 						//Pagina si és necessari
-						$conTable.upage({
+						$conTable.MFPage({
 							numItems: rData.count,
 							page: page,
 							maxResults: maxResults,
@@ -244,7 +244,7 @@
 			for (var k in schema){
 				if (!schema[k].isPublic) continue;
 				let $field  = $('<th />',{
-					'class' : 'llista-' + k + ' ' + views[k] + (typeOrder[0] == k? ' ' + arrOrder[1].toLowerCase() : ''),
+					'class' : 'llista-' + k + ' ' + views[k] + (typeOrder[1] == k? ' ' + arrOrder[1].toLowerCase() : ''),
 					text: schema[k].tr,
 	                click: function(event){
 	                	var k = $(event.target).data('fieldName');

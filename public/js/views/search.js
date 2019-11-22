@@ -65,7 +65,7 @@
 			
 			var $form = $('<form />',{
 				action : '#',
-				'class' : 'cercador',
+				'class' : 'search-form',
 				submit : function(){
 					var inputVal = $input.val();
 					if (inputVal){
@@ -105,7 +105,7 @@
 			
 			$button = $('<input />',{
 				type: 'submit',
-				'class' : 'search-button',
+				'class' : 'search-button btn-primary',
 				value: 'Cerca'
 			}).appendTo($form);
 
