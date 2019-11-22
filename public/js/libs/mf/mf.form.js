@@ -28,22 +28,16 @@
 						$.removeData(this, 'formulari');
 				}
 			});
-			if (res !== undefined) {
-				return res;
-			}
+			if (res !== undefined) return res;
 			return this;
 		}
-		
 		options = $.extend(defaults, options || {});
-		
 		this.each(function(i, _element) {
 			var element = $(_element);
 			var formulari = new Formulari(element, options);
-			
 			element.data('formulari', formulari);
 			formulari.init();
 		});
-		
 		return this;
 	};
 	
@@ -79,15 +73,14 @@
 			
 			var $form = $('<form />', {
 				id : "formulari",
-				'class' : "fr"
+				'class' : "mf-form"
 			}).appendTo(element);
 
 			//Paint Elements
 			for (var i = 0; i < data.content.length; i++)
 				$form.append(_paint(data.content[i], i));
 
-			
-			var $formButtons = $('<div />',{'class' :"fr-buttons"}).appendTo($form);
+			var $formButtons = $('<div />',{'class' :"mf-form-buttons"}).appendTo($form);
 			// Save
 			$('<input />',{
 				type : "submit",
@@ -99,7 +92,6 @@
 					_save();
 				}
 			}).appendTo($formButtons);
-
 
 			// Save and create new Regsiter
 			if (!edit && newReg){
@@ -114,8 +106,7 @@
 				}).appendTo($formButtons);
 
 				$form.keypress(function(e){
-					if(e.controlkey && e.which == 13)
-						$saveAndNew.click();
+					if (e.controlkey && e.which == 13) $saveAndNew.click();
 				});
 			}
 			
@@ -129,7 +120,6 @@
 					cancel();
 				}
 			}).appendTo($formButtons);
-			
 			$('#element_0').focus();
 		}
 
@@ -144,13 +134,13 @@
 		//Private methods
 		function _paint(dataEl, num){
 			var $field = $('<div />', {
-				'class' : 'fr-element'
+				'class' : 'mf-form-element'
 			});
 			var $box;
 			
 			if (dataEl.type != 'check') {
 				$('<label />',{
-					'class' : "fr-label",
+					'class' : "mf-form-label",
 					'for': 'element_' + num,
 					text : dataEl.name
 				}).appendTo($field);
@@ -184,13 +174,13 @@
 
 				case 'check':
 					var $check = $('<input />',{
-						'class' : 'fr-checkbox',
+						'class' : 'mf-form-checkbox',
 						type : 'checkbox',
 						id : 'element_' + num
 					}).appendTo($field);
 					
 					$('<label />',{
-						'class' : "fr-label fr-label-checkbox",
+						'class' : "mf-form-label mf-form-label-checkbox",
 						'for': 'element_' + num,
 						text : dataEl.name
 					}).appendTo($field);
@@ -260,21 +250,19 @@
 					case 'string':
 						valor = elVal = el.val();
 						break;
-					
+
 					case 'check':
 						valor = elVal = el.prop('checked')? 1 : 0;
 						break;
 						
 					case 'sel':
 						elVal = el.val();
-						if (elVal == el.data('valor'))
-							valor = {id : el.data('iden')};
+						if (elVal == el.data('valor')) valor = {id : el.data('iden')};
 						break;
 	
 					case 'tag':
 						var tagList = el.inputTags('getData');
 						if (!tagList.length) continue;
-
 						var valor = [];
 						for (var j = 0; j < tagList.length; j++)
 							valor.push(_getResult(dataEl, tagList[j]).id);
@@ -283,19 +271,14 @@
 					case 'collection':
 					    elVal = el.val();
 					    if (!elVal) break;
-
-                        if (elVal == el.data('iden'))
-                            valor = el.data('iden');
-                        else
-                        	valor = _getResult(dataEl, elVal).id;
+                        if (elVal == el.data('iden')) valor = el.data('iden');
+                        else valor = _getResult(dataEl, elVal).id;
                         break;
                         
 					case 'object':
 						elVal = el.val();
-						if (elVal == el.data('valor'))
-							valor = {id : el.data('iden')};
-						else
-							valor = {id : _getResult(dataEl, elVal).id};
+						if (elVal == el.data('valor')) valor = {id : el.data('iden')};
+						else valor = {id : _getResult(dataEl, elVal).id};
 						break;
 				}
 				objMessage[dataEl.seccio] = valor;

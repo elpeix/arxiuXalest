@@ -3,12 +3,8 @@
 <head>
     <title><?=$appName?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/mf.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link rel="stylesheet" type="text/css" href="css/alerts.css">
-    <link rel="stylesheet" type="text/css" href="css/form.css">
-    <link rel="stylesheet" type="text/css" href="css/up.element.tags.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.8.16.custom.css">
 </head>
 <body>
     <div id="header">
