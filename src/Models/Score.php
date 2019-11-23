@@ -75,10 +75,6 @@ class Score implements Model {
 
     // @Override
     public function getAllowedOrderFields(): array {
-        return $this->getAllowedFields();
-    }
-
-    private function getAllowedFields(): array {
         return [
             DB_PREFIX.'scores.id',
             DB_PREFIX.'scores.name',
@@ -97,6 +93,28 @@ class Score implements Model {
             DB_PREFIX.'lyricists.id',
             DB_PREFIX.'choirTypes.name',
             DB_PREFIX.'choirTypes.id'
+        ];
+    }
+
+    private function getAllowedFields(): array {
+        return [
+            'scores.id',
+            'scores.name',
+            'scores.century',
+            'cupboards.name',
+            'cupboards.id',
+            'boxes.name', 
+            'boxes.id', 
+            'composers.name',
+            'composers.id',
+            'styles.name',
+            'styles.id',
+            'languages.name',
+            'languages.id',
+            'lyricists.name',
+            'lyricists.id',
+            'choirTypes.name',
+            'choirTypes.id'
         ];
     }
 

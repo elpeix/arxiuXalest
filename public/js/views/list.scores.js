@@ -106,7 +106,7 @@
 			} else{
 				//Add filter bar
 				$('<div />',{
-					text : 'Mostra barra de filtres',
+					text : 'Mostra els filtres',
 					'class' : 'llista-filtre-show',
 					click: function(){
 						$preCont.prepend(_filterBar());
@@ -186,7 +186,7 @@
 				'class' : 'llista-menu-views-cont'
 			});
 			var menuView = $('<div />',{
-				text: 'Columnes visibles',
+				text: 'Columnes',
 				'class' : 'llista-menu-views',
 				click : function(e){
 					e.stopPropagation();

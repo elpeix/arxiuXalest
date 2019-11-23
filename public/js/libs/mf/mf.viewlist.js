@@ -138,7 +138,6 @@ MF.ViewList = function(element, options){
                 }
 			}).appendTo($line).data('fieldName', k);
 		}
-		
 		if (isAdmin && !viewConfig.preventEdit){
 			$('<th class="llista-edit" title="Edita" />').appendTo($line);
 			$('<th class="llista-edit" title="Elimina" />').appendTo($line);
@@ -170,7 +169,7 @@ MF.ViewList = function(element, options){
 			click : function(){
 				app.filter = [{
             		sch : viewConfig.type,
-            		field:  viewConfig.type,
+            		field:  viewConfig.filterParam,
             		type : 'equal',
             		val : dataEl.id
             	}];

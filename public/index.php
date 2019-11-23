@@ -26,6 +26,12 @@ if (PHP_SAPI == 'cli-server') {
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../src/Application/system.php';
 
+if (DEBUG) {
+    ini_set('display_errors', 'On');
+    ini_set('display_startup_errors', 'On');
+    error_reporting(E_ALL);
+}
+
 require LANGUAGES_PATH . '/' . DEFAULT_LANGUAGE . '.php';
 
 $containerBuilder = new ContainerBuilder();

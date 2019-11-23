@@ -47,6 +47,7 @@ a:hover{color:#333;text-decoration:underline;}
 #menuAdminBtn.sel{background: #666;color: #98eaef;}
 #menuAdmin:after{bottom: 100%;border: 5px solid transparent;border-bottom-color: #666;content : "";height: 0;left: 5px;pointer-events:none;position: absolute;width: 0;}
 #menuAdmin{background: #666;border-radius: 2px;margin-left: 5px;position: fixed;padding:10px 0;color: #ddd;display: none;box-shadow: 1px 1px 3px #bbb;}
+#menuAdmin li {float: none;}
 #menuAdmin li > a{color: #fff;cursor: pointer;display: block;padding: 15px 20px;text-decoration: none;}
 #menuAdmin li > a:hover{background: #ddd;color: #333;box-shadow: inset 0 -2px 0 #98eaef;}
 
@@ -71,11 +72,11 @@ input[type="text"].search-text:focus{border-color: #888;}
 .llista-pre-cont{background: white;overflow:hidden;margin: 0;clear: both;}
 .llista-filtre-show {color: #aaa;cursor: pointer;display: block;float: left;margin: -12px 0 5px;text-decoration:underline;}
 .llista-filtre-show:hover {color: #888;}
-.llista-filtre{float:left;width: 250px;border-right: 1px solid #e1e1e1;}
+.llista-filtre{/**/}
 .llista-filtre-title{background: #cf4646;color: #fff;font-weight: bold;padding: 6px 6px;text-align: left;}
 .llista-filtre-title .ui-icon-circle-close{cursor:pointer;float:right;opacity:0.7;}
 .llista-filtre-title .ui-icon-circle-close:hover{opacity:1;}
-.llista-filtre-cont-el{background:rgba(140, 160, 160, .3);border:1px solid rgba(255,255,255,.6);margin: 10px;padding: 8px;text-align: left;border-radius: 3px;}
+.llista-filtre-cont-el{background:rgba(140, 160, 160, .3);border:1px solid rgba(255,255,255,.6);padding: 8px;text-align: left;border-radius: 3px;}
 .llista-filtre-cont-el > .ui-icon{float:right;margin: -1px 0 0;cursor: pointer;opacity:0.5;}
 .llista-filtre-cont-el > .ui-icon:hover{opacity:1;}
 .llista-filtre-cont-el-span-editable{border-bottom:1px dotted #333;cursor: text;display: inline-block;height:15px;margin-bottom:-1px;width:110px !important;}
@@ -88,11 +89,16 @@ input[type="text"].search-text:focus{border-color: #888;}
 .llista-filtre-cont-add-select{margin-top: 8px;padding: 3px;width:100%;}
 .llista-filtre-cont-add-input {width: 160px !important;}
 
-.llista-menu-views{border:1px solid #ccc;float:right;cursor:pointer;margin:-20px 0 0;opacity:0.4;width: 150px;padding:3px 2px 4px 6px;}
+@media (min-width: 48em) {
+  .llista-filtre{float:left;width: 250px;border-right: 1px solid #e1e1e1;}
+  .llista-table.wfilter{border-left:1px solid #e1e1e1;margin-left: 250px;}
+}
+
+.llista-menu-views{border:1px solid #ccc;float:right;cursor:pointer;margin:-20px 0 0;opacity:0.4;width: 85px;padding:3px 2px 4px 6px;}
 .llista-menu-views:hover{opacity:1;border-color: #bbb;}
 .llista-menu-views.sel{opacity:1;border-color: #aaa;}
-.llista-menu-views span{display: inline-block !important;margin: 0 0 -4px 10px;}
-.llista-menu-views-cont{background:#fff;border:1px solid #aaa;border-top: none;display: none;position:absolute;text-align:left;margin: 4px 0 0;min-width: 151px;text-align: left;z-index: 10;}
+.llista-menu-views span{display: inline-block !important;margin: 0 0 -4px 0;}
+.llista-menu-views-cont{background:#fff;border:1px solid #aaa;border-top: none;display: none;position:absolute;text-align:left;margin: 4px 0 0 -24px;min-width: 110px;text-align: left;z-index: 10;}
 .llista-menu-views-el{background: #fff;padding:4px;cursor:pointer;border-top: 1px solid #aaa;}
 .llista-menu-views-el:first {border:none;}
 .llista-menu-views-el .ui-icon-check{display: inline-block !important;}
@@ -103,7 +109,7 @@ input[type="text"].search-text:focus{border-color: #888;}
 .llista-menu-views-el.hide .ui-icon-bullet{display: inline-block !important;opacity:0.5;}
 .llista-menu-views.sel .llista-menu-views-cont{display:block;}
 
-.llista-table.wfilter{border-left:1px solid #e1e1e1;margin-left: 250px;}
+
 .llista-cont{text-align:left;width: 100%;}
 .llista-head{background: #18a;cursor:default;border-radius: 4px 4px 0 0;}
 .llista-line-head{border-bottom: 0px solid #98babf !important;}

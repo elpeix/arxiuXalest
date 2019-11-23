@@ -13,7 +13,7 @@
 			if (!message) alertVar.fadeOut();
 			else {
 				alertVar.removeClass()
-						.addClass(type)
+						.addClass("mf-alert").addClass(type)
 						.append(message)
 						.show();
 				window.setTimeout(function(){

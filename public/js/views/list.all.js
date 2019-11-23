@@ -3,43 +3,43 @@ var listElements = {
 		collection : app.composerCollection,
 		type :'composer',
 		title : 'Compositors',
-		filter_param : 'composer=',
+		filterParam : 'composers.id',
 	},
 	listCupboards : {
 		collection : app.cupboardCollection,
 		type :'cupboard',
 		title : 'Armaris',
-		filter_param : 'cupboard=',
+		filterParam : 'cupboards.id',
 	},
 	listBoxes : {
 		collection : app.boxCollection,
 		type :'box',
 		title : 'Caixes',
-		filter_param : 'box=',
+		filterParam : 'boxes.id',
 	},
 	listChoirTypes : {
 		collection : app.choirTypeCollection,
 		type :'choirType',
 		title : 'Veus',
-		filter_param : 'choirType=',
+		filterParam : 'choirTypes.id',
 	},
 	listLanguages : {
 		collection : app.languageCollection,
 		type :'language',
 		title : 'Idiomes',
-		filter_param : 'language=',
+		filterParam : 'languages.id',
 	},
 	listLyricists : {
 		collection : app.lyricistCollection,
 		type :'lyricist',
 		title : 'Lletristes',
-		filter_param : 'lyricist=',
+		filterParam : 'lyricists.id',
 	},
 	listStyles : {
 		collection : app.styleCollection,
 		type :'style',
 		title : 'Estils',
-		filter_param : 'style=',
+		filterParam : 'styles.id',
 	}
 }
 
@@ -53,7 +53,7 @@ for (const key in listElements) {
 						collection : element.collection,
 						type :element.type,
 						title : element.title,
-						filter_param : element.filter_param,
+						filterParam : element.filterParam,
 					},
 					page: 1,
 					maxResults: 20,
@@ -68,10 +68,8 @@ for (const key in listElements) {
 						var list = $.data(this, key);
 						if (list && $.isFunction(list[options])) {
 							var r = list[options].apply(list, args);
-							if (res === undefined)
-								res = r;
-							if (options == 'destroy')
-								$.removeData(this, key);
+							if (res === undefined) res = r;
+							if (options == 'destroy') $.removeData(this, key);
 						}
 					});
 					if (res !== undefined) {
@@ -79,16 +77,13 @@ for (const key in listElements) {
 					}
 					return this;
 				}
-				
 				options = $.extend(defaults, options || {});
-				
 				this.each(function(i, _element) {
 					var element = $(_element);
 					var list = new MF.ViewList(element, options);
 					element.data(key, list); 
 					list.init();
 				});
-				
 				return this;
 			};
 		})(jQuery);

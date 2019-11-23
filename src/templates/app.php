@@ -3,6 +3,7 @@
 <head>
     <title><?=$appName?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="css/mf.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
@@ -18,9 +19,7 @@
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul id="menu" class="menu">
-            
             <li id="logout" class="menu-static logout"><a href="#" title="<?=$language['logout']?>"><?=$language['logout']?></a></li>
-            <li id="user" class="menu-static user"><a href="#user" id="username"><?=$user->firstName?> <?=$user->lastName?></a></li>
         </ul>
     </div>
 
