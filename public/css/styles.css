@@ -47,6 +47,7 @@ a:hover{color:#333;text-decoration:underline;}
 #menuAdminBtn.sel{background: #666;color: #98eaef;}
 #menuAdmin:after{bottom: 100%;border: 5px solid transparent;border-bottom-color: #666;content : "";height: 0;left: 5px;pointer-events:none;position: absolute;width: 0;}
 #menuAdmin{background: #666;border-radius: 2px;margin-left: 5px;position: fixed;padding:10px 0;color: #ddd;display: none;box-shadow: 1px 1px 3px #bbb;}
+#menuAdmin li {float: none;}
 #menuAdmin li > a{color: #fff;cursor: pointer;display: block;padding: 15px 20px;text-decoration: none;}
 #menuAdmin li > a:hover{background: #ddd;color: #333;box-shadow: inset 0 -2px 0 #98eaef;}
 

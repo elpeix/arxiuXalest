@@ -34,7 +34,7 @@ return function(App $app) {
         $group->get('', CupboardController::class.':getList');
         $group->post('', CupboardController::class.':create');
         $group->get('/{id:[0-9]+}', CupboardController::class.':get');
-        $group->put('/{id:[0-9]+}', CupboardController::class.':update');
+        $group->post('/{id:[0-9]+}', CupboardController::class.':update');
         $group->delete('/{id:[0-9]+}', CupboardController::class.':remove');
     });
 
@@ -43,7 +43,7 @@ return function(App $app) {
         $group->get('', BoxController::class.':getList');
         $group->post('', BoxController::class.':create');
         $group->get('/{id:[0-9]+}', BoxController::class.':get');
-        $group->put('/{id:[0-9]+}', BoxController::class.':update');
+        $group->post('/{id:[0-9]+}', BoxController::class.':update');
         $group->delete('/{id:[0-9]+}', BoxController::class.':remove');
     });
 
@@ -52,7 +52,7 @@ return function(App $app) {
         $group->get('', ComposerController::class.':getList');
         $group->post('', ComposerController::class.':create');
         $group->get('/{id:[0-9]+}', ComposerController::class.':get');
-        $group->put('/{id:[0-9]+}', ComposerController::class.':update');
+        $group->post('/{id:[0-9]+}', ComposerController::class.':update');
         $group->delete('/{id:[0-9]+}', ComposerController::class.':remove');
     });
 
@@ -61,7 +61,7 @@ return function(App $app) {
         $group->get('', StyleController::class.':getList');
         $group->post('', StyleController::class.':create');
         $group->get('/{id:[0-9]+}', StyleController::class.':get');
-        $group->put('/{id:[0-9]+}', StyleController::class.':update');
+        $group->post('/{id:[0-9]+}', StyleController::class.':update');
         $group->delete('/{id:[0-9]+}', StyleController::class.':remove');
     });
 
@@ -70,7 +70,7 @@ return function(App $app) {
         $group->get('', LanguageController::class.':getList');
         $group->post('', LanguageController::class.':create');
         $group->get('/{id:[0-9]+}', LanguageController::class.':get');
-        $group->put('/{id:[0-9]+}', LanguageController::class.':update');
+        $group->post('/{id:[0-9]+}', LanguageController::class.':update');
         $group->delete('/{id:[0-9]+}', LanguageController::class.':remove');
     });
 
@@ -79,7 +79,7 @@ return function(App $app) {
         $group->get('', LyricistController::class.':getList');
         $group->post('', LyricistController::class.':create');
         $group->get('/{id:[0-9]+}', LyricistController::class.':get');
-        $group->put('/{id:[0-9]+}', LyricistController::class.':update');
+        $group->post('/{id:[0-9]+}', LyricistController::class.':update');
         $group->delete('/{id:[0-9]+}', LyricistController::class.':remove');
     });
 
@@ -87,7 +87,7 @@ return function(App $app) {
         $group->get('', ScoreController::class.':getList');
         $group->post('', ScoreController::class.':create');
         $group->get('/{id:[0-9]+}', ScoreController::class.':get');
-        $group->put('/{id:[0-9]+}', ScoreController::class.':update');
+        $group->post('/{id:[0-9]+}', ScoreController::class.':update');
         $group->delete('/{id:[0-9]+}', ScoreController::class.':remove');
     });
 
@@ -95,7 +95,7 @@ return function(App $app) {
         $group->get('', ChoirTypeController::class.':getList');
         $group->post('', ChoirTypeController::class.':create');
         $group->get('/{id:[0-9]+}', ChoirTypeController::class.':get');
-        $group->put('/{id:[0-9]+}', ChoirTypeController::class.':update');
+        $group->post('/{id:[0-9]+}', ChoirTypeController::class.':update');
         $group->delete('/{id:[0-9]+}', ChoirTypeController::class.':remove');
     });
 
@@ -103,7 +103,7 @@ return function(App $app) {
         $group->get('', UsersController::class.':getList');
         $group->post('', UsersController::class.':create');
         $group->get('/{id:[0-9]+}', UsersController::class.':get');
-        $group->put('/{id:[0-9]+}', UsersController::class.':update');
+        $group->post('/{id:[0-9]+}', UsersController::class.':update');
         $group->delete('/{id:[0-9]+}', UsersController::class.':remove');
         $group->post('/changePassword', UsersController::class.':changePassword');
     });
