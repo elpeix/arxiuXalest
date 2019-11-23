@@ -40,8 +40,10 @@ class ScoreService extends BasicService {
             $filterItem = preg_split('/=/', $value);
             if ($this->isValid($filterItem[0]) && \trim($filterItem[1] != "")) {
                 $itemWildcard = str_replace('.', '_', $filterItem[0]);
-                $arrParam = preg_split('/\./', $filterItem[0]);
-                if (count($arrParam) == 1){
+                if (count(preg_split('/\.(name)/', $filterItem[0])) == 1) {
+                    array_push($filter, "$filterItem[0]=:$itemWildcard");
+                    $this->addQueryParam(":$itemWildcard", $filterItem[1]);
+                } elseif (count(preg_split('/\./', $filterItem[0])) == 1) {
                     array_push($filter, "$this->entity.$filterItem[0]=:$filterItem[0]");
                     $this->addQueryParam(":$itemWildcard", $filterItem[1]);
                 } else {
@@ -50,7 +52,6 @@ class ScoreService extends BasicService {
                 }
             }
         }
-
         if (count($filter) > 0) {
             $this->sqlAdd(' WHERE ' . implode(' AND ', $filter));
         }
