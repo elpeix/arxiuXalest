@@ -25,3 +25,4 @@ define('PASSWORD_VALIDATOR', '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\{\}@$!%*?¡¿&,:
 define('PASSWORD_VALIDATOR_MESSAGE', 'Minimum eight characters, at least one letter and one number.');
 
 define('SQL_DATE_FORMAT', 'Y-m-d H:i:s');
+define('SESSION_PATH', "/tmp");

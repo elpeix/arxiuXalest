@@ -11,6 +11,7 @@ use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 class SessionMiddleware implements Middleware {
 
     public function process(Request $request, RequestHandler $handler): Response {
+        session_save_path(SESSION_PATH);
         session_start();
         $request = $request->withAttribute('session', $_SESSION);
 
