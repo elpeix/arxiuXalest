@@ -8,4 +8,4 @@ window.app = {
   advancedFilter: false
 };
 var DEBUG;
-var APP_PSEUDO_PUT;
+var APP_PSEUDO_PUT = true;
