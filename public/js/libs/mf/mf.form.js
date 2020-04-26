@@ -1,9 +1,8 @@
 /**
- * UAW Form
+ * MF Form
  * @autor: Francesc Requesens i Roca
  * @date: 2013-10-15
  * @version: 0.4 
- * 
  */
 ;(function($){
 	$.fn.formulari = function(options){
