@@ -1,13 +1,3 @@
-/**
- * Plugin viewScore
- * Data Name: viewscore
- * Function Name: ViewScore
- * 
- * @author Ubiquat Technologies
- * @version 0.1 2013-10-17
- *
- */
-
 ;(function($) {
 	$.fn.viewScore = function(options) {
 		var defaults = {
