@@ -1,8 +1,7 @@
 
 /**
  * Class Name: MF Framework for browsers
- * Experimental environment for creating web applications 
- * based on REST. Just to learn.
+ * Experimental environment for creating web applications.
  * 
  * Based on backbone
  * 
