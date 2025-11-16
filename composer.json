@@ -10,10 +10,12 @@
         }
     ],
     "require": {
-        "monolog/monolog": "^1.24",
-        "php-di/php-di": "^6.0",
-        "slim/slim": "^4.0",
-        "slim/psr7": "^1.6.1",
+        "php": "^8.4",
+        "ext-json": "*",
+        "monolog/monolog": "^3.9",
+        "php-di/php-di": "^7.1",
+        "slim/psr7": "^1.8",
+        "slim/slim": "^4.15",
         "slim/php-view": "^2.2"
     },
     "autoload": {

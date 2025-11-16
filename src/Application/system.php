@@ -3,11 +3,13 @@
 define('APP_NAME', 'Arxiu Xalest');
 
 // /!\ WARNING - Never upload valid credentials!!!
-define('DB_HOST','localhost');
+define('DB_HOST','db');
 define('DB_USER','root');
-define('DB_PASS','igualada');
+define('DB_PASS','secret');
 define('DB_NAME','arxiu');
 define('DB_PREFIX','');
+
+define('DEBUG', true);
 
 define('MAX_PER_PAGE', 1000);
 

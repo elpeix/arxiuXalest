@@ -15,7 +15,7 @@ class FieldsValues {
     private $reflection;
     private $object;
 
-    public function __construct(ReflectionClass $reflection, $object) {
+    public function __construct(ReflectionObject $reflection, $object) {
         $this->reflection = $reflection;
         $this->object = $object;
         $this->fields = array();
@@ -24,26 +24,41 @@ class FieldsValues {
         $this->updateValues = array();
     }
     
-    public function prepare(bool $ignoreId = false) {
+    public function prepare(bool $ignorePrimary = true) {
         foreach ($this->reflection->getProperties() as $property) {
-            $value = $this->getValue($property);
-            if ($value != null && ($ignoreId || $property->name != 'id')) {
-                array_push($this->fields, $property->name);
-                array_push($this->values, ':'.$property->name);
-                array_push($this->updateValues, $property->name.'=:'.$property->name);
-                $this->params[$property->name] = $value;
+            if ($property['builtin']) {
+                $fieldName = $property['name'];
+                $value = $this->getValue($fieldName);
+                if (isset($value) && (!$this->isPrimary($property) || (!$ignorePrimary && $this->isPrimary($property)))) {
+                    array_push($this->fields, $fieldName);
+                    array_push($this->values, ':'.$fieldName);
+                    array_push($this->updateValues, $fieldName.'=:'.$fieldName);
+                    $this->params[$fieldName] = $value;
+                }
+            } else {
+                $fieldName = $property['relation'];
+                $objValue = $this->getValue($property['name']);
+                if ($objValue != null) {
+                    $value = $objValue->getValue('id');
+                    array_push($this->fields, $fieldName);
+                    array_push($this->values, ':' . $fieldName);
+                    array_push($this->updateValues, $fieldName . '=:' . $fieldName);
+                    $this->params[$fieldName] = ($value == null) ? null : $value;
+                }
             }
         }
     }
 
-    private function getValue(ReflectionProperty $property) {
-        if ($property->isPublic()) {
-            return $property->getValue($this->object);
+    private function isPrimary($property) {
+        return isset($property['primary']) && $property['primary'];
+    }
+
+    private function getValue(string $fieldName) {
+        try {
+            return $this->object->getValue($fieldName, true);
+        } catch (\Exception $e) {
+            return null;
         }
-        $property->setAccessible(true);
-        $value = $property->getValue($this->object);
-        $property->setAccessible(false);
-        return $value;
     }
 
     public function getStrFields(): string {
