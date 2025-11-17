@@ -57,7 +57,7 @@ class UsersController extends BasicController {
         if ($body['oldPassword'] == $body['password']){
             throw new BadRequestApiException("I think you don't want to change your password.");
         }
-        \var_dump('edit password - TODO'); exit();
+        var_dump('edit password - TODO'); exit();
     }
 
 }

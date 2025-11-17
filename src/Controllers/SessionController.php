@@ -5,6 +5,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Application\Controller;
 use App\Application\Exception\BadRequestApiException;
+use App\Ensemblers\UserEnsembler;
 use App\Services\SessionService;
 
 class SessionController extends Controller {
@@ -13,16 +14,20 @@ class SessionController extends Controller {
         $body = $this->getBody($request);
         $service = new SessionService();
         $user = $service->getUser($body['username'], $body['password']);
+
         if ($user == null) {
             throw new BadRequestApiException("Invalid login.");
         }
-        $user->lastLoginDate = date(SQL_DATE_FORMAT);
-        $user->lastLoginAddress = $_SERVER['REMOTE_ADDR'];
-        $user->visits = $user->visits + 1;
 
-        $service->updateLogin($user);
-        $_SESSION['user'] = $user;
-        return $this->ok($user, $response);
+        $user->setValue('lastLoginDate', date(SQL_DATE_FORMAT));
+        $user->setValue('lastLoginAddress', $_SERVER['REMOTE_ADDR']);
+        $user->setValue('visits', intval($user->getValue('visits')) + 1);
+        $service->update($user->getId(), $user);
+
+        $ensembler = new UserEnsembler();
+        $_SESSION['user'] = $ensembler->ensemble($user);
+
+        return $this->ok($_SESSION['user'], $response);
     }
 
     public function logout(Request $request, Response $response, array $args): Response {

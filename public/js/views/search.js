@@ -87,7 +87,7 @@
 						} else {
 							app.filter = [{
 								sch : 'name',
-								field: 'scores.name',
+								field: 'name__icontains',
 								type : '',
 								val : inputVal
 							}];

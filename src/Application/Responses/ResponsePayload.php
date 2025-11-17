@@ -28,7 +28,7 @@ class ResponsePayload implements JsonSerializable {
         return $this->error;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize(): mixed {
         if ($this->data !== null) {
             return $this->data;
         }
