@@ -3,43 +3,43 @@ var listElements = {
 		collection : app.composerCollection,
 		type :'composer',
 		title : 'Compositors',
-		filterParam : 'composers.id',
+		filterParam : 'composer.id',
 	},
 	listCupboards : {
 		collection : app.cupboardCollection,
 		type :'cupboard',
 		title : 'Armaris',
-		filterParam : 'cupboards.id',
+		filterParam : 'cupboard.id',
 	},
 	listBoxes : {
 		collection : app.boxCollection,
 		type :'box',
 		title : 'Caixes',
-		filterParam : 'boxes.id',
+		filterParam : 'box.id',
 	},
 	listChoirTypes : {
 		collection : app.choirTypeCollection,
 		type :'choirType',
 		title : 'Veus',
-		filterParam : 'choirTypes.id',
+		filterParam : 'choirType.id',
 	},
 	listLanguages : {
 		collection : app.languageCollection,
 		type :'language',
 		title : 'Idiomes',
-		filterParam : 'languages.id',
+		filterParam : 'language.id',
 	},
 	listLyricists : {
 		collection : app.lyricistCollection,
 		type :'lyricist',
 		title : 'Lletristes',
-		filterParam : 'lyricists.id',
+		filterParam : 'lyricist.id',
 	},
 	listStyles : {
 		collection : app.styleCollection,
 		type :'style',
 		title : 'Estils',
-		filterParam : 'styles.id',
+		filterParam : 'style.id',
 	}
 }
 

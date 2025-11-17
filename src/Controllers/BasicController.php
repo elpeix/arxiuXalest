@@ -15,7 +15,7 @@ abstract class BasicController extends Controller {
 
     public function getList(Request $request, Response $response, array $args): Response {
         $this->validatePermissions();
-        $result = $this->getService()->getList($request->getQueryParams());
+        $result = $this->getService()->getList($request->getQueryParams(), $args);
         return $this->ok($result, $response);
     }
 

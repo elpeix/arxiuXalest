@@ -4,103 +4,48 @@ namespace App\Models;
 
 use App\Application\Orm\Model;
 
-class Score implements Model {
+class Score extends Model {
 
-    public $id;
-    public $name;
-    public $century;
-    public $cupboard;
-    public $box;
-    public $composer;
-    public $style;
-    public $language;
-    public $lyricist;
-    public $choirType;
+    public $entity = 'scores';
 
-    public static function createObject(array $obj): Score {
-        $score = new Score();
-        $score->id = $obj['_id'];
-        $score->name = $obj['_name'];
-        $score->century = $obj['_century'];
-        if ($obj['cupboard_id'] > 0) {
-            $score->cupboard = new Cupboard($obj['cupboard_id'], $obj['cupboard_name']);
-        }
-        if ($obj['box_id'] > 0) {
-            $score->box = new Box($obj['box_id'], $obj['box_name']);
-        }
-        if ($obj['composer_id'] > 0) {
-            $score->composer = new Composer($obj['composer_id'], $obj['composer_name']);
-        }
-        if ($obj['style_id'] > 0) {
-            $score->style = new Style($obj['style_id'], $obj['style_name']);
-        }
-        if ($obj['language_id'] > 0) {
-            $score->language = new Language($obj['language_id'], $obj['language_name']);
-        }
-        if ($obj['lyricist_id'] > 0) {
-            $score->lyricist = new Lyricist($obj['lyricist_id'], $obj['lyricist_name']);
-        }
-        if ($obj['choirType_id'] > 0) {
-            $score->choirType = new ChoirType($obj['choirType_id'], $obj['choirType_name']);
-        }
+    public int $id;
+    public string $name;
+    public int $century;
+    public ?Cupboard $cupboard;
+    public ?Box $box;
+    public ?Composer $composer;
+    public ?Style $style;
+    public ?Language $language;
+    public ?Lyricist $lyricist;
+    public ?ChoirType $choirType;
 
-        return $score;
+    public $attributes = [
+        'id' => ['type' => 'int', 'primary' => true],
+        'name' => ['type' => 'string'],
+        'century' => ['type' => 'int'],
+        'cupboard' => ['type' => 'App\Models\Cupboard', 'relation' => 'cupboardId'],
+        'box' => ['type' => 'App\Models\Box', 'relation' => 'boxId'],
+        'composer' => ['type' => 'App\Models\Composer', 'relation' => 'composerId'],
+        'style' => ['type' => 'App\Models\Style', 'relation' => 'styleId'],
+        'language' => ['type' => 'App\Models\Language', 'relation' => 'languageId'],
+        'lyricist' => ['type' => 'App\Models\Lyricist', 'relation' => 'lyricistId'],
+        'choirType' => ['type' => 'App\Models\ChoirType', 'relation' => 'choirTypeId']
+    ];
+
+    public function getAttributes(): array {
+        return $this->attributes;
     }
 
-    public static function getRelationFields(): array {
-        return array(
-            [DB_PREFIX.'cupboards', 'cupboard'],
-            [DB_PREFIX.'boxes', 'box'],
-            [DB_PREFIX.'composers', 'composer'],
-            [DB_PREFIX.'styles', 'style'],
-            [DB_PREFIX.'languages', 'language'],
-            [DB_PREFIX.'lyricists', 'lyricist'],
-            [DB_PREFIX.'choirTypes', 'choirType'],
-        );
-    }
-
-    public function validateFilterField(string $field): bool {
-        $splittedField = preg_split('/\./', $field);
-        if (count($splittedField) == 1){
-            return \in_array($this->entity() . '.'.$field, $this->getAllowedFields());
-        }
-        return \in_array($field, $this->getAllowedFields());  
-
-    }
-
-    // @Override
-    public function entity(): string {
-        return DB_PREFIX.'scores';
+    public function validateFilterField(string $key): bool {
+        return array_search($key, $this->getAllowedFilterFields());
     }
 
     // @Override
     public function getAllowedOrderFields(): array {
         return [
-            DB_PREFIX.'scores.id',
-            DB_PREFIX.'scores.name',
-            DB_PREFIX.'scores.century',
-            DB_PREFIX.'cupboards.name',
-            DB_PREFIX.'cupboards.id',
-            DB_PREFIX.'boxes.name', 
-            DB_PREFIX.'boxes.id', 
-            DB_PREFIX.'composers.name',
-            DB_PREFIX.'composers.id',
-            DB_PREFIX.'styles.name',
-            DB_PREFIX.'styles.id',
-            DB_PREFIX.'languages.name',
-            DB_PREFIX.'languages.id',
-            DB_PREFIX.'lyricists.name',
-            DB_PREFIX.'lyricists.id',
-            DB_PREFIX.'choirTypes.name',
-            DB_PREFIX.'choirTypes.id'
-        ];
-    }
-
-    private function getAllowedFields(): array {
-        return [
-            'scores.id',
-            'scores.name',
-            'scores.century',
+            'id',
+            'name',
+            'century',
             'cupboards.name',
             'cupboards.id',
             'boxes.name', 
@@ -118,8 +63,16 @@ class Score implements Model {
         ];
     }
 
+    private function getAllowedFilterFields(): array {
+        return [
+            'id', 'name', 'name__icontains' ,'century', 'century__icontains',
+            'composer.id', 'lyricist.id', 'style.id', 'language.id', 'choirType.id',
+            'cupboard.id', 'box.id'
+        ];
+    }
+
     // @Override
-    public function jsonSerialize() {
+    public function jsonSerialize(): mixed {
         return [
             'id' => (int) $this->id,
             'name' => $this->name,

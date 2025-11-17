@@ -9,14 +9,10 @@ abstract class BasicModel extends Model {
     public int $id;
     public ?string $name;
 
-    public function __construct(?int $id = null, ?string $name = null) {
-        if ($id != null) {
-            $this->id = $id;
-        }
-        if ($name != null) {
-            $this->name = $name;
-        }
-    }
+    public $attributes = [
+        'id' => ['type' => 'int', 'primary' => true],
+        'name' => ['type' => 'string']
+    ];
 
     public function getAttributes(): array {
         return $this->attributes;
@@ -28,8 +24,8 @@ abstract class BasicModel extends Model {
 
     public function jsonSerialize(): mixed {
         return [
-            'id' => (int) $this->id,
-            'name' => $this->name
+            'id' => (int) $this->getValue('id'),
+            'name' => $this->getValue('name')
         ];
     }
 }

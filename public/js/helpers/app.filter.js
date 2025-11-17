@@ -201,7 +201,6 @@
 			}).appendTo($select);
 			
 			for (var k in schema) {
-				console.log(schema[k].type);
 				if (!schema[k].isPublic || schema[k].type == 'tag') continue;
 				if (!window.app.advancedFilter && schema[k].type == 'collection') {
 					continue;
@@ -259,11 +258,10 @@
 							if (index === 0) dataFilter.push([obj]);
 							else dataFilter.push(obj);
 							_cleanFilter();
-						}
-						else {
+						} else {
 							app.filter.push({
 								sch : k,
-								field : 'scores.' + k,
+								field : k + '__icontains',
 								type : '',
 								val : $this.val()
 							});

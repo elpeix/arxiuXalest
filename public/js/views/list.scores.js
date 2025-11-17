@@ -349,7 +349,7 @@
 								var str = dataItem.content.name? dataItem.content.name : '-';
 								$field.text(str).addClass('link').click(function(){
 								var k = $(this).data('fieldName');
-								var field = app[k + 'Collection'].model.prototype.basePath + ".id";
+								var field = k + ".id";
 								app.filter.push({
 									sch : k,
 									field:  field,
